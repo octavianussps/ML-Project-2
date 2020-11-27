@@ -1,6 +1,6 @@
 import tensorflow.keras as keras
 from tensorflow.keras import layers
-from utils.helpers import *
+from helpers import *
 
 
 class cnnRegression(keras.Model):

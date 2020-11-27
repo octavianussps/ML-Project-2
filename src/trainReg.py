@@ -1,4 +1,4 @@
-from utils.helpers import *
+from helpers import *
 from cnnReg import cnnRegression
 from utils.metrics import f1_scores
 

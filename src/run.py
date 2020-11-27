@@ -1,5 +1,5 @@
 import tensorflow as tf
-from utils.helpers import *
+from helpers import *
 from cnn_model import CnnModel
 import tensorflow.keras as keras
 import sys

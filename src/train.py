@@ -1,4 +1,4 @@
-from utils.helpers import *
+from helpers import *
 from cnn_model import CnnModel
 from utils.metrics import f1_scores
 
