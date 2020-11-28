@@ -9,15 +9,16 @@ class CnnModel(keras.Model):
     def __init__(self):
         super(CnnModel, self).__init__()
         keras.backend.set_image_data_format('channels_last')
-
+        self.batch_size = 256
         self.patch_size = 4
         self.window_size = 18  # size of the window acting as context for the patch
-        self.nb_channels = 3  # color images in RGB mode
-        self.leak_alpha = 0.1  # leaky_relu parameter
+        self.channels = 3  # color images in RGB mode
+        self.nb_classes = 2  # black and white labeling
+        self.alpha = 0.1  # leaky relu parameter
         self.dropout_prob = 0.25  # random dropout parameter
         self.regularization_value = 1e-6  # regularization value
-        self.nb_classes = 2  # black and white labeling
-        self.batch_size = 256
+        self.pool = (2,2)
+        self.stride = (1,1)
         self.create_model()
 
     def create_model(self):
@@ -25,31 +26,31 @@ class CnnModel(keras.Model):
         self.model = keras.Sequential()
 
         # Input layer
-        input_shape = (self.window_size, self.window_size, self.nb_channels)
+        input_shape = (self.window_size, self.window_size, self.channels)
         self.model.add(layers.InputLayer(input_shape))
 
         # First convolution layer : 5x5 filter, depth 64
-        self.model.add(layers.Conv2D(64, 5, padding='same'))
-        self.model.add(layers.LeakyReLU(alpha=self.leak_alpha))
-        self.model.add(layers.MaxPool2D(padding='same'))
+        self.model.add(layers.Conv2D(filters = 64, kernel_size = 5, strides = self.stride, padding='same'))
+        self.model.add(layers.LeakyReLU(alpha=self.alpha))
+        self.model.add(layers.MaxPool2D(pool_size = self.pool, padding='same'))
         self.model.add(layers.Dropout(self.dropout_prob))
 
         # Second convolution layer : 3x3 filter, depth 128
-        self.model.add(layers.Conv2D(128, 3, padding='same'))
-        self.model.add(layers.LeakyReLU(alpha=self.leak_alpha))
-        self.model.add(layers.MaxPool2D(padding='same'))
+        self.model.add(layers.Conv2D(filters = 128, kernel_size = 3, strides = self.stride, padding='same'))
+        self.model.add(layers.LeakyReLU(alpha=self.alpha))
+        self.model.add(layers.MaxPool2D(pool_size = self.pool, padding='same'))
         self.model.add(layers.Dropout(self.dropout_prob))
 
-        # Third convolution layer : 3x3 filter, depth 128
-        self.model.add(layers.Conv2D(256, 3, padding='same'))
-        self.model.add(layers.LeakyReLU(alpha=self.leak_alpha))
-        self.model.add(layers.MaxPool2D(padding='same'))
+        # Third convolution layer : 3x3 filter, depth 256
+        self.model.add(layers.Conv2D(filters = 256, kernel_size = 3, strides = self.stride, padding='same'))
+        self.model.add(layers.LeakyReLU(alpha=self.alpha))
+        self.model.add(layers.MaxPool2D(pool_size = self.pool, padding='same'))
         self.model.add(layers.Dropout(self.dropout_prob))
         self.model.add(layers.Flatten())
 
         # Fourth fully connected layer : 128 node
         self.model.add(layers.Dense(128, kernel_regularizer=keras.regularizers.l2(self.regularization_value)))
-        self.model.add(layers.LeakyReLU(alpha=self.leak_alpha))
+        self.model.add(layers.LeakyReLU(alpha=self.alpha))
         self.model.add(layers.Dropout(self.dropout_prob * 2))
 
         # Softmax activation function
