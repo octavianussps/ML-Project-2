@@ -1,6 +1,6 @@
 from helpers import *
 from cnn_model import CnnModel
-from utils.metrics import f1_scores
+#from utils.metrics import f1_scores
 
 data_dir = '../data/training/'
 train_data_filename = data_dir + 'images/'

@@ -3,9 +3,8 @@ from helpers import *
 from cnn_model import CnnModel
 import tensorflow.keras as keras
 import sys
-from cnnReg import cnnRegression
 
-PATH_WEIGHTS = '../models/weightsOrigTrainedOn900.h5'
+PATH_WEIGHTS = '../models/weightsFinal.h5'
 PATH_REG = '../models/weightsReg.h5'
 PATH_UNET = '../models/unet.h5'
 PATH_PATCH = '../models/weightsPatch4.h5'
