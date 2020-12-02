@@ -33,7 +33,7 @@ In `scripts/` we can see:
 ## **Description**
 
 This project was part of a challenge from EPFL course : Machine Learning CS-433 and was hosted on the platform AIcrowd.
-They are a set of satellite/aerial images acquired from GoogleMaps and ground-truth images where each pixel is labeled as {road, background}. The objective is to train a classifier to segment roads in these images, i.e. assign a label {road=1, background=0} to each pixel.
+They are a set of satellite/aerial images acquired from GoogleMaps and ground-truth images where each pixel is labeled as {road, background}. The objective is to train a classifier to segment roads in these images, i.e. assign a label {road=1, background=0} to each patch of pixel size 16x16.
 
 ## **Prerequisites**
 The code is tested with the following versions 
