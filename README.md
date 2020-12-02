@@ -18,16 +18,17 @@ The detailed explanation of the project is on the report (`latex/report.pdf`).
 | Folder  | Files |
 |:--:|:--:|
 | `data/`  | test data |
-| `out/`  | contains the final subission file, also csv.format |
 | `latex/` | contains the pdf and the latex report of our project |
 | `models/`  | the models we use |
+| `out/`  | contains the final subission file, also csv format |
 | `scripts/`  | all the python scripts we used in this project, further explanation below |
 
 In `scripts/` we can see:
 
 + `run.py` is a script which produces the submission.csv file for the test data.
-+ `mask_to_submission.py` is a script to make a submission file from a binary image
-+ `submission_to_mask.py` is a script to reconstruct an image from the sample submission file
++ `cnn_model.py` contains several function to make the cnn regretion model
++ `helpers.py` contains several helper functions to run the cnn regression
++ `train.py` is a script to make the cnn regretion model
 
   
 
@@ -47,13 +48,11 @@ The code is tested with the following versions
 
 ## **Dataset**
 In https://www.aicrowd.com/challenges/epfl-ml-road-segmentation you will find the training set consisting of images with their ground truth and the test set 
-Download it and put it in the folder named `Data`.
+Download it and put it in the folder named `data`.
 
 
 ## **Running**
 In order to submit the predictions we give on the test data, you have to run the `run.py` file. It will load the data, preprocess it, build the feature matrix and then train the model (in this case Least Squares). Then the model is used to predict the labels of the test data and the `out/submission.csv` file will be generated.
-
-  
 
 
 ## **Results**
