@@ -53,21 +53,19 @@
 \maketitle
 
 \begin{abstract}
-	The goal of this project is to implement and train a Neural Network that is able to segment satellite images into roads and background. We implement a Convolutional Neural Network and use the Sliding Window Approach in order to tackle this classification task. TO BE ADDED: RESULTS 
-\end{abstract}
+	The goal of this project is to implement and train a Neural Network that is able to segment satellite images into roads and background. We implement a Convolutional Neural Network and use the sliding window aAproach in order to tackle this classification task. We got a F1-score of 0.881 as the best result.TO\end{abstract}
 
 \section{Introduction}
-Image segmentation is a well known task in the field of Deep Learning which can be handled by Neural Networks. There exist different approaches such as Convolutional Neural Networks (\cite{pixelwise}) or newer ones such as the U-Net (\cite{unet}) which both yield good results according to our research.
+\vspace{0.3cm}
+Image segmentation is a well known task in the field of Deep Learning which can be handled by Neural Networks. There exist different approaches such as Convolutional Neural Networks (\cite{pixelwise}) or newer ones such as the U-Net (\cite{unet}) which both yield good results according to our research. We decided to choose the Convolutional Neural Network,  since it seemed very natural to us to classify patces of the image by taken into account their context inside the image. 
+\\\\We start explaining our methods, i.e. description of the classification task and doing data augmentation.  Then we present the network structure, the training process as well as tuning of the hyperparameters. With this trained network we predict on the test data and then present our results obtained with the CNN. We conclude with a discussion and summarize our results.
 
-We decided to choose the Convolutional Neural Network since it seemed very natural to us to classify pixels of the image by taken into account their context inside the image. 
-\\\\In the first section we explain our methods i.e. data augmentation, our model, training of the model as well as tuning of the hyperparameters.
-We then present our results obtained with the CNN. We obtain TO BE ADDED good results
-
-
-
+\vspace{0.5cm}
 \section{Methods}
+\vspace{0.3cm}
 \subsection{Classification Task}
-Our Neural Net takes as input parts of the image of size 72x72, so called windows, and classifies if the 16x16 patch in the center of this window belongs to "road" or not. If the net classifies the patch as road, the output should be [1,0]. Hence it will be white in the predicted label.  Otherwise it should be [0,1] and the patch in the label will be black. This is illustrated in Figure 1. 
+
+Our Neural Net takes as input parts of the image of size 72x72, so called windows, and classifies if the 16x16 patch in the center of this window belongs to "road" or not. If the net classifies the patch as road, the output should be [0,1].
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=6cm]{images/classificationTask.png}
@@ -76,18 +74,17 @@ Our Neural Net takes as input parts of the image of size 72x72, so called window
 	\label{fig:clas}
 \end{figure}
 
-The idea behind this approach is, that the patch in the center is classified by taken into consideration the surrounding of this patch. E.g. if we have a lot of vehicles near or in the patch, it is more likely that the patch belongs to road. The patch hence is somehow classified by its context in the image. \\
+ This corresponds to the label 1 and hence will be white in the predicted label.  Otherwise it should be [1,0] and the patch in the label will be black. This is illustrated in Figure 1. 
+
+
+The idea behind this approach is, that the patch in the center is classified by taken into consideration the surrounding of this patch. Intuitively speaken, if we have a lot of vehicles near or in the patch, it is more likely that the patch belongs to road. Conversely, if there are buildings everywhere around the patch, the patch also belongs to background with high probability. Each patch hence is classified by its context in the image. \\
 
 
 \subsection{Data Augmentation}
 
-The training data consists of 100 RGB satellite images of size 400x400 and their groundtruth (400x400 binary image) respectively. 
-Obviously this task is not easy. Sometimes the roads are hidden by a tree or cars may drive on them. 
-We therefore augment our training data in order to achieve better results. We rotate each image and its groundtruth by 15, 30, 45, 60, 90, 100, 180 and 270 degrees. When rotating we obtain bigger images, where several parts are just black. We therefore fill those parts by reflecting the image along its boundary axis. Then we crop out images of size 400x400 to get training images and groundtruths in the same size as the 'original' training images, groundtruths respectively.
-
-%
-%\begin{figure}[htbp]
-%	\centering
+The training data consists of 100 RGB satellite images of size 400x400 and their groundtruths, 400x400 binary images respectively. 
+Obviously this classification task described above is not easy to handle. Sometimes roads are hidden by a tree, or s may drive on them and many other difficulties could arise. 
+We therefore augment our training data in order to achieve better results. We rotate each image and its groundtruth by 15, 30, 45, 60, 90, 100, 180 and 270 degrees. We reflect the images along theirits boundary axes and thenis. Then we crop out images of size 400x400 to get training images and groundtru in the same size as the 'raining data. This is illustrated in Figure 2. images, groundtruths respectively.                                                                              ring
 %	\includegraphics[width=4cm]{images/data_augment.png}
 %	\caption{'Original' training image and groundtruth.}
 %	\label{fig:dat}
@@ -117,13 +114,14 @@ We therefore augment our training data in order to achieve better results. We ro
 	\caption{Example of augmenting data: Rotated by 15 degrees, mirrored along the boundary axes and cropped out 400 x 400 pixels.}
 \end{figure}
 
-By doing so we augmented the amount of data by a factor of 9.
+By doing so we augment the amount of training data by a factor of 9.
 
 
 
 \subsection{Convolutional Neural Net}
 \label{cnn}
-With aim of classifying the whole image we move our window through the whole image. This so called 'sliding window' approach is illustrated in Figure 3.
+
+With aim of classifying the whole image and not just one patch, we make use of thege. This so called 'sliding window'h that is illustrated in Figure 3.
 
 
 \begin{figure}[htbp]
@@ -134,12 +132,11 @@ With aim of classifying the whole image we move our window through the whole ima
 	\label{fig:slidwindo}
 \end{figure}
 
-In order to apply this technique to patches near the border, we have to enlarge the images. We therefore choose a padding method: At the border we reflect each image along its boundary axes.
+In order to apply this technique to patches near the border, we have to enlarge the images. We therefore choose a padding method: At the border we reflect each image along its boundary axes. Then we move the window through the whole image. For each window we classify the label of the patch in the center. 
 \\
 
-SAY SOMETHING ABOUT WE USED TENSORFLOW...
-The architecture of our Convolutional Neural Net is displayed in Table 1. 
-TO BE ADDED CHOICE OF LAYERS, DROPOUT
+
+The architecture of our first Convolutional Neural Net is displayed in Table 1. We implemented three convolutional layers with increasing depth. After each of them we apply the Leaky Relu as activation function and use Max Pooling and Dropout layers in order to fight overfitting and make our model more robust. 
 
 \begin{table}[htbp]
 	\centering
@@ -162,46 +159,56 @@ TO BE ADDED CHOICE OF LAYERS, DROPOUT
 		\hline
 		Dense + LReLU &128 nodes\\
 		Dropout&0.5\\		
-		Softmax + Output&2 labels\\
+		Softmax + Output&2 nodes\\
 		\hline
 	\end{tabular}
 	\caption{Architecture of the Convolutional Neural Network.}
 	\label{tab:cnn_architecture}
 \end{table}
 
+We also implemented another quite similar CNN, it consists of the same structure of layers. We feed in bigger windows of size 128x128. This approach allows to consider even a bigger context of the patch in the center of the window and hopefully makes it easier for the CNN to classify the patch. Due to the computational increase that will arise, we decrease the depth of the convolutional layers. We also use bigger filters of size 10x10.
 
 
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}[c]{|l||l|}
+		\hline
+		\textbf{Layer}&\textbf{Characteristics}\\
+		\hline
+		Input&128x128x3 RGB\\
+		Conv + LReLU &10 filter each 10x10\\
+		Max Pooling&2x2\\		
+		Dropout&0.25\\
+		\hline
+		Conv + LReLU &10 filter each 10x10\\
+		Max Pool&2x2\\		
+		Dropout&0.25\\
+		\hline
+		Conv + LReLU &10 filter each 10x10\\
+		Max Pool&2x2\\		
+		Dropout&0.25\\
+		\hline
+		Dense + LReLU &128 nodes\\
+		Dropout&0.5\\		
+		Softmax + Output&2 nodes\\
+		\hline
+	\end{tabular}
+	\caption{Architecture of the Convolutional Neural Network 2.}
+	\label{tab2:cnn_architecture}
+\end{table}
 \subsection{Training}
-
-In the training process we randomly choose a window of an image of the training data. We then compute the corresponding patch of the groundtruth image. The groundtruth label is then given by the mean of all pixels in this patch: If it is higher than a certain threshold, 0.25 in our case, then the label will be black, otherwise white.\\
-By doing so we get even much more training data since each window of each image corresponds to one training image. But since some of the windows overlap themselves, we don't gain much more information by using all of them.
-
-
-TO BE ADDED. TUNED HYPERPARAMETERS: ALPHA, DROPOUT, ACTIVATION FUNCTIONS , WINDOW/PATCH SIZE!"!! WHY WE CHOSE THEM IN THIS MANNER
-takes a lot of tim 3 000 000 parameters to be trained
-GPU BLABLA
-
-We chose the patch size to be 16, because submit on ai crowd!! window not too big because of computational cost
-
-CROSSVALIDATION???
-
-CROSSVALIDATION???
-
-CROSSVALIDATION???
-
-CROSSVALIDATION???
-
+\label{training}
+In the training process we randomly choose a window of an image of the training data. We then compute the corresponding patch of the groundtruth image. The groundtruth label is then given by the mean of all pixels in this patch: If it is higher than a certain threshold, 0.25 in our case, then the label will be 1, otherwise 0.\\
+By doing so we get even much more training data since each window of each image actually  corresponds to one training image. \\We tuned the following hyperparameters: the parameter  $\alpha$ for the Leaky Relu Function $f(x)=max(x,\alpha x)$, the dropout probability, window size, patch size. 
 \subsection{Prediction}
-
-The test image data consists of 50 RGB satellite images of size 608x608. We first have to do some data preparation: We enlarge the images by a padding method similar to the one explained in section \ref{cnn}. After cropping the image into windows of size 72x72, we feed each window into our neural network and predict a label for the patch in the center of the window. We get our final predictions by mapping each label back to its corresponding patch and setting these patches together to an image.
-We use a stride that has the same size as our patch. Thus we don't miss too much information, since the windows overlap.
-
-
+The test image data consists of 50 RGB satellite images of size 608x608. We first have to do some data preparation: We enlarge the images by a padding method similar to the one explained in section \ref{cnn}. After cropping the image into windows of size 72x72, we feed each window into our neural network and predict a label for the patch in the center of this window. We get our final predictions by mapping each label back to its corresponding patch and setting these patches together to an image.
+We use a stride that has the same size as our patch. 
+\vspace{0.5cm}
 \section{Results}
+\vspace{0.3cm}
+For every test image we obtain a prediction, which segments roads from background. Two test images and their predictions are displayed below.
 
-For every test image we obtained a prediction, which segments roads from background. Two example images and their corresponding groundtruth are displayed below.
-
-\begin{figure}[H]
+\begin{figure}[htbp]
 	\centering
 	\begin{subfigure}[htb]{0.2\textwidth}
 		\includegraphics[width=4.2cm]{images/visualize_pred/images/test_2.png}
@@ -215,7 +222,8 @@ For every test image we obtained a prediction, which segments roads from backgro
 	\caption{Test image 2 and its prediction.}
 \end{figure}
 
-\begin{figure}[H]
+
+\begin{figure}[htbp]
 	\centering
 	\begin{subfigure}[htb]{0.2\textwidth}
 		\includegraphics[width=4.2cm]{images/visualize_pred/images/test_9.png}
@@ -229,21 +237,13 @@ For every test image we obtained a prediction, which segments roads from backgro
 	\caption{Test image 9 and its prediction.}
 \end{figure}
 
+In general the roads are well segmented from the background. In Figure 4 the network was able to recognize the roads, although on the right they were hidden by some trees. It also did not misclassify the parking lot as road. The small part of road on the bottom left was also correctly classified, unfortunately not that smoothly due to the patch size. In Figure 5 one can see some misclassified patches on the highway, although the rails and the parking lot were correcty labelled as background. Also in this case all roads were well detected in general. The CNN performs quite good .\\As one can observe, a window size of 72x72 and patch size of 16x16 doesn't give very smooth predictions. This is obviously caused by the fact, that we predict one label for a whole patch. If one chooses smaller patches, one will get smoother results. This can be seen in Figure 6. In the smoother case we chose a window size of 16x16 and patch size 4x4.\\
 
 
-As one can oberve, a patch size of 16x16 and window size of 72x72 gives not very smooth predictions of road. This is obviously caused by the fact, that we predict one label for a whole patch. If we choose smaller patches, we get smoother result. 
-
-\section{Discussion}
-
-
-
-
-
-
-\begin{figure}
+\begin{figure}[htbp]
 	\centering
 	\begin{subfigure}[b]{0.15\textwidth}
-	\includegraphics[width=\textwidth]{images/visualize_pred/test_10.png}
+		\includegraphics[width=\textwidth]{images/visualize_pred/test_10.png}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.15\textwidth}
 		\includegraphics[width=\textwidth]{images/visualize_pred/pred_10.png}
@@ -255,8 +255,35 @@ As one can oberve, a patch size of 16x16 and window size of 72x72 gives not very
 	\label{fig:animals}
 \end{figure}
 
-\section{Summary}
+AICrowd expects labels for patches of size 16x16. Therefore in the latter case we computed the mean over 16 smaller patches of size 4x4 to compute the label for the 16x16 patch in which the smaller patches are lying inside. Unfortunately this did not give us better results. 
+The final results for both Convolutional Neural Networks are displayed in Table 3. The CNN with 72x72 window size performs best achieving F1-Score of 0.882. The CNN 2 also performs quite good, the F1-Score is 0.862. q
 
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}[c]{|l||l|}
+		\hline
+		\textbf{Model}&\textbf{F1-Score}\\
+		\hline
+		\textbf{CNN}, 16x16 window, 4x4 patch&0.741\\
+	 	\textbf{CNN}, 72x72 window, 16x16 patch&0.882\\
+	 	\textbf{CNN 2}, 128x128 window, 16x16 patch&0.862\\
+		\hline
+	\end{tabular}
+	\caption{Results.}
+	\label{tab:results}
+\end{table}
+
+
+
+
+\vspace{0.5cm}
+\section{Discussion}
+\vspace{0.3cm}
+
+
+\vspace{0.5cm}
+\section{Summary}
+\vspace{0.3cm}
 
 
 
