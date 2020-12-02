@@ -38,6 +38,7 @@ This project was part of a challenge from EPFL course : Machine Learning CS-433 
 They are a set of satellite/aerial images acquired from GoogleMaps and ground-truth images where each pixel is labeled as {road, background}. The objective is to train a classifier to segment roads in these images, i.e. assign a label {road=1, background=0} to each patch of pixel size 16x16.
 
 ## **Prerequisites**
+
 The code is tested with the following versions 
 - `Python 3.7.x`
 - `Numpy 1.17.xx`
@@ -47,6 +48,7 @@ The code is tested with the following versions
 
 
 ## **Dataset**
+We did not put the trainig data in the github because it's take a lot of memory place.
 In https://www.aicrowd.com/challenges/epfl-ml-road-segmentation you will find the training set consisting of images with their ground truth and the test set 
 Download it and put it in the folder named `data`.
 
