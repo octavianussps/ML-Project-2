@@ -59,4 +59,4 @@ In order to submit the predictions we give on the test data, you have to run the
 
 ## **Results**
 
-We achieved a F1- score of  0.822 on the website. All the details are in the report.
+We achieved a F1- score of 0.882 and the accuracy of 0.938 on the website. All the details are in the report.
