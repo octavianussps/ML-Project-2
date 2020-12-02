@@ -43,14 +43,14 @@ def main(argv):
             # Run the normal CNN model
             model = CnnModel()
             #model.built=True
-            model.load_weights(PATH_PATCH)
+            model.load_weights(PATH_WEIGHTS)
             # Generates the submission
             #modelType = 2
             #generate_submission(model, PATH_SUBMISSION, modelType, *image_filenames_test)
             
             # IF SMALLER PATCHES CHOSEN, COMPUTE THE MEAN OVER SOME OF THEM
             # IN ORDER TO SUBMIT ON AICROWD
-            modelType = 3
+            modelType = 2
             generate_submission(model, PATH_SUBMISSION, modelType, *image_filenames_test)
             
                 

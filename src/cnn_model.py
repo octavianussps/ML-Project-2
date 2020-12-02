@@ -10,8 +10,8 @@ class CnnModel(keras.Model):
         super(CnnModel, self).__init__()
         keras.backend.set_image_data_format('channels_last')
         self.batch_size = 256
-        self.patch_size = 4
-        self.window_size = 18  # size of the window acting as context for the patch
+        self.patch_size = 16
+        self.window_size = 72  # size of the window acting as context for the patch
         self.channels = 3  # color images in RGB mode
         self.nb_classes = 2  # black and white labeling
         self.alpha = 0.1  # leaky relu parameter
@@ -70,7 +70,7 @@ class CnnModel(keras.Model):
     def train_model(self, gt_imgs, tr_imgs, nb_epochs=100):
         """Trains the CNN model """
 
-        np.random.seed(1)  # for reproducibility
+        np.random.seed(1234)  
         nb_images = tr_imgs.shape[0]
 
         padding_size = (self.window_size - self.patch_size) // 2
