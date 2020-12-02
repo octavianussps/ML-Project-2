@@ -5,11 +5,11 @@ from cnn_model import CnnModel
 data_dir = '../data/training/'
 train_data_filename = data_dir + 'images/'
 train_labels_filename = data_dir + 'groundtruth/'
-PATH_WEIGHTS_try = '../models/weights.h5'
+PATH_WEIGHTS = '../models/weightsFinal.h5'
 PATH_WEIGHTS_PATCH4 = '../models/weightsPatch4.h5'
 
-num_images = 20
-nb_epochs = 2
+num_images = 900
+nb_epochs = 100
 
 
 
