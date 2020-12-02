@@ -17,9 +17,10 @@ The detailed explanation of the project is on the report (`latexreport/report.pd
 
 | Folder  | Files |
 |:--:|:--:|
-| `test_set_images/`  | test data |
+| `data/`  | test data |
 | `out/`  | contains the final subission file, also csv.format |
-| `latexreport/` | contains the pdf and the latex report of our project |
+| `latex/` | contains the pdf and the latex report of our project |
+| `models/`  | the models we use |
 | `scripts/`  | all the python scripts we used in this project, further explanation below |
 
 In `scripts/` we can see:
@@ -54,22 +55,6 @@ In order to submit the predictions we give on the test data, you have to run the
 
   
 
-It will give some output like this:
-
-
-```
-loading data
-
-preprocessing data
-
-building polynomial with degree 11
-
-training model with least squares
-
-predicting labels for test data
-
-exporting csv file
-```
 
 ## **Results**
 
