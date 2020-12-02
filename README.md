@@ -7,7 +7,7 @@
 
 This readme file contains useful information of the structure of the project containing the code and report. For further information of the project and its results we advise you to read the report.
 
-The detailed explanation of the project is on the report (`latexreport/report.pdf`).
+The detailed explanation of the project is on the report (`latex/report.pdf`).
 
   
 
