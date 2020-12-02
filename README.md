@@ -44,6 +44,21 @@ The code is tested with the following versions
 - `TensorFlow 2.0`
 - `Pillow 6.2.xx`
 
+### installation
+Now, install the necessary data science libraries. Make sure to install them in order listed below.
+
+```
+conda install ipython
+conda install jupyter
+conda install -c conda-forge matplotlib
+conda install pandas
+conda install scipy
+conda install scikit-learn
+conda install -c anaconda pillow
+pip install --upgrade tensorflow
+pip install --upgrade keras
+```
+
 
 ## **Dataset**
 We did not put the trainig data in the github because it takes too much memory place.
