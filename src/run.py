@@ -5,8 +5,6 @@ import tensorflow.keras as keras
 import sys
 
 PATH_WEIGHTS = '../models/weightsFinal.h5'
-PATH_REG = '../models/weightsReg.h5'
-PATH_UNET = '../models/unet.h5'
 PATH_PATCH = '../models/weightsPatch4.h5'
 PATH_TEST_DATA = '../data/test_set_images/'
 PATH_PREDICTION_DIR = '../data/predictions/'
