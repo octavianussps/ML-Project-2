@@ -24,10 +24,13 @@ def main():
     #model.built=True
     model.load_weights(PATH_WEIGHTS)
     # Generates the submission
-    #modelType = 2
-    #generate_submission(model, PATH_SUBMISSION, modelType, *image_filenames_test)
+    
+    
     # IF SMALLER PATCHES CHOSEN, COMPUTE THE MEAN OVER SOME OF THEM
     # IN ORDER TO SUBMIT ON AICROWD
+    # in this case select modelType = 3
+    
+    
     modelType = 2
     generate_submission(model, PATH_SUBMISSION, modelType, *image_filenames_test)
             
