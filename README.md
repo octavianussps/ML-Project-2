@@ -9,11 +9,8 @@ This readme file contains useful information of the structure of the project con
 
 The detailed explanation of the project is on the report (`latex/report.pdf`).
 
-  
 
 ## **Project structure**
-
-
 
 | Folder  | Files |
 |:--:|:--:|
@@ -21,14 +18,15 @@ The detailed explanation of the project is on the report (`latex/report.pdf`).
 | `latex/` | contains the pdf and the latex report of our project |
 | `models/`  | the models we use |
 | `out/`  | contains the final submission files, also csv format |
-| `scripts/`  | all the python scripts we used in this project, further explanation below |
+| `src/`  | all the python scripts we used in this project, further explanation below |
 
-In `scripts/` you can see:
+In `src/` you can see:
 
 + `run.py` is a script which produces the submission.csv file for the test data.
 + `cnn_model.py` contains several functions to build the cnn 
 + `helpers.py` contains several helper functions in order to run the cnn 
 + `train.py` is a script to train the cnn using the training data 
++ `visualisation` is a folder containing some notebooks to help for the visualization
 
   
 
@@ -46,6 +44,21 @@ The code is tested with the following versions
 - `TensorFlow 2.0`
 - `Pillow 6.2.xx`
 
+### installation
+Now, install the necessary data science libraries. Make sure to install them in order listed below.
+
+```
+conda install ipython
+conda install jupyter
+conda install -c conda-forge matplotlib
+conda install pandas
+conda install scipy
+conda install scikit-learn
+conda install -c anaconda pillow
+pip install --upgrade tensorflow
+pip install --upgrade keras
+```
+
 
 ## **Dataset**
 We did not put the trainig data in the github because it takes too much memory place.
@@ -59,4 +72,4 @@ In order to submit the predictions we give on the test data, you have to run the
 
 ## **Results**
 
-We achieved a F1- score of  0.822 on the website. All the details are in the report.
+We achieved a F1- score of 0.882 and the accuracy of 0.938 on the website. All the details are in the report.
