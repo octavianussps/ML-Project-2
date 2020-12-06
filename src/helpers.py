@@ -247,7 +247,9 @@ def generate_submission(model, submission_path, modelType, *image_filenames):
     with open(submission_path, 'w') as f:
         f.write('id,prediction\n')
         for fn in image_filenames[0:]:
-            if modelType == 2:
+            if modelType == 1:
+                f.writelines('{}\n'.format(s) for s in mask_to_submission_strings_unet(fn))
+            elif modelType == 2:
                 f.writelines('{}\n'.format(s) for s in mask_to_submission_strings(model, fn))
             else:
                 f.writelines('{}\n'.format(s) for s in mask_to_submission_strings_for_smaller_patches(model, fn))
@@ -331,4 +333,51 @@ def predicted_BW(model, image_filename):
     image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
     
     return  model.predict(image).reshape(-1)#we predict the labels
+    
+    
+    
+    
+def mask_to_submission_strings_unet(image_filename):
+    """Reads a predicted image (BW) and outputs the strings that should go into the submission file"""
+    img_number = int(re.search(r"\d+", image_filename).group(0))
+    im = mpimg.imread(image_filename)
+    patch_size = 16
+    for j in range(0, im.shape[1], patch_size):
+        for i in range(0, im.shape[0], patch_size):
+            patch = im[i: i + patch_size, j: j + patch_size]
+            label = patch_to_label(patch)
+            yield "{:03d}_{}_{},{}".format(img_number, j, i, label)
+
+
+def gen_image_predictions_unet(model, prediction_path, *image_filenames):
+    """Predicts labels and export them as BW images"""
+    for idx, path in enumerate(image_filenames):
+        img = np.squeeze(load_image(path))
+        prediction = img_predict_unet(img, model)
+        prediction = np.squeeze(prediction).round()
+        prediction = img_float_to_uint8(prediction)
+        prediction_name = prediction_path + 'pred_' + str(idx + 1) + '_unet.png'
+        Image.fromarray(prediction).save(prediction_name)
+
+
+def img_predict_unet(img, model):
+    width = img.shape[0]
+    height = img.shape[1]
+
+    img1 = img[:400, :400]
+    img2 = img[:400, -400:]
+    img3 = img[-400:, :400]
+    img4 = img[-400:, -400:]
+
+    imgs = np.array([img1, img2, img3, img4])
+    predictions = model.predict(imgs)
+
+    prediction = np.zeros((width, height, 1))
+
+    prediction[:400, :400] = predictions[0]
+    prediction[:400, -400:] = predictions[1]
+    prediction[-400:, :400] = predictions[2]
+    prediction[-400:, -400:] = predictions[3]
+
+    return prediction
 
