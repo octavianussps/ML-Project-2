@@ -8,7 +8,7 @@ import sys
 PATH_MODEL = '../models/unetBestWeights.h5'
 PATH_TEST_DATA = '../data/test_set_images/'
 PATH_PREDICTION_DIR = '../data/predictions/'
-PATH_SUBMISSION = 'submissionUnet.csv'
+PATH_SUBMISSION = '../out/submissionUnet.csv'
 TEST_SIZE = 50
 
 SIZE_IMAGES = 400
