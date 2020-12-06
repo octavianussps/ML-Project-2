@@ -4,7 +4,7 @@ from unetmodel import *
 from helpers import *
 
 TRAIN_DATA = "../data/training/"
-MODEL_PATH = "../models/unetweights.h5"
+MODEL_PATH = "../models/unetBestWeights.h5"
 
 BATCH = 16
 EPOCHS = 100
@@ -36,10 +36,16 @@ def main():
     unet.summary()
     
     
+    #instantiate the model
+    unet = unet_model(SIZE_IMAGES, NUM_FILTERS)
+    unet.summary()
+    unet = keras.models.load_model(MODEL_PATH)
+
+    
     # train the model
     unet = train(unet, imgs, gt_imgs, BATCH, EPOCHS)
     # save the weights
-    model.save(MODEL_PATH)
+    unet.save(MODEL_PATH)
     
 if __name__== "__main__" :
     main()
