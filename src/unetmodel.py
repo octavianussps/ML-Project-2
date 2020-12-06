@@ -99,10 +99,11 @@ def unet_model(img_size, num_filters):
 def train(model, x_train, y_train, batch_size, num_epochs):
     """Optimize the model and return the model with the training F1-Score"""
     try:
-        history = model.fit(x_train, y_train, batch_size=batch_size, epochs=num_epochs, validation_split=0.0)
+        checkpoint = ModelCheckpoint("../models/unetBestWeights.h5",monitor='loss',verbose =1,save_best_only = True,mode = 'auto',period = 5)
+        history = model.fit(x_train, y_train, batch_size=batch_size, epochs=num_epochs, callbacks=[checkpoint], validation_split=0.1)
     except KeyboardInterrupt:
             pass
-
+    print("model trained!")
     return model
 
     
