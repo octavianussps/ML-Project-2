@@ -84,7 +84,7 @@ The idea behind this approach is, that the patch in the center is classified by 
 
 The training data consists of 100 RGB satellite images of size 400x400 and their groundtruths, 400x400 binary images respectively. 
 Obviously this classification task described above is not easy to handle. Sometimes roads are hidden by a tree, or s may drive on them and many other difficulties could arise. 
-We therefore augment our training data in order to achieve better results. We rotate each image and its groundtruth by 15, 30, 45, 60, 90, 100, 180 and 270 degrees. We reflect the images along theirits boundary axes and thenis. Then we crop out images of size 400x400 to get training images and groundtru in the same size as the 'raining data. This is illustrated in Figure 2. images, groundtruths respectively.                                                                              ring
+We therefore augment our training data in order to achieve better results. We rotate each image and its groundtruth by 15, 30, 45, 60, 90, 100, 180 and 270 degrees. We reflect the images along their boundary axes. Then we crop out images of size 400x400 to get training images and groundtruths in the same size as the 'original' training data. This is illustrated in Figure 2.    + SALT PEPPER NOISE?                              
 %	\includegraphics[width=4cm]{images/data_augment.png}
 %	\caption{'Original' training image and groundtruth.}
 %	\label{fig:dat}
@@ -267,7 +267,7 @@ The final results for both Convolutional Neural Networks are displayed in Table 
 		\textbf{CNN}, 16x16 window, 4x4 patch&0.741\\
 	 	\textbf{CNN}, 72x72 window, 16x16 patch&0.882\\
 	 	\textbf{CNN 2}, 128x128 window, 16x16 patch&0.862\\
-		\textbf{U-Net} &0.827\\
+		\textbf{U-Net} &0.894\\
 		\hline
 	\end{tabular}
 	\caption{Results.}
