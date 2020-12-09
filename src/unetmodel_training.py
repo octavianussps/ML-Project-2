@@ -3,14 +3,18 @@ import matplotlib.pyplot as plt
 from unetmodel import *
 from helpers import *
 
+
 TRAIN_DATA = "../data/training/"
 MODEL_PATH = "../models/unetBestWeights.h5"
+MODEL_PATH_LRELU = '../models/unetLReLU.h5'
+
+
 
 BATCH = 16
-EPOCHS = 100
+EPOCHS = 500
 
 SIZE_IMAGES = 400
-NUM_IMAGES = 10
+NUM_IMAGES = 900
 NUM_FILTERS = 32
 
 
@@ -34,18 +38,13 @@ def main():
     #instantiate the model
     unet = unet_model(SIZE_IMAGES, NUM_FILTERS)
     unet.summary()
-    
-    
-    #instantiate the model
-    unet = unet_model(SIZE_IMAGES, NUM_FILTERS)
-    unet.summary()
-    unet = keras.models.load_model(MODEL_PATH)
+    unet = keras.models.load_model(MODEL_PATH_LRELU)
 
     
     # train the model
     unet = train(unet, imgs, gt_imgs, BATCH, EPOCHS)
     # save the weights
-    unet.save(MODEL_PATH)
+    unet.save(MODEL_PATH_LRELU)
     
 if __name__== "__main__" :
     main()

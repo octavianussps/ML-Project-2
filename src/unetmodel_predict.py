@@ -5,14 +5,15 @@ import tensorflow.keras as keras
 import sys
 
 
-PATH_MODEL = '../models/unetBestWeights.h5'
+
+PATH_WEIGHTS = '../models/unetBestWeights.h5'
+PATH_LRELU = '../models/unetLReLU.h5'
 PATH_TEST_DATA = '../data/test_set_images/'
 PATH_PREDICTION_DIR = '../data/predictions/'
 PATH_SUBMISSION = '../out/submissionUnet.csv'
 TEST_SIZE = 50
 
-SIZE_IMAGES = 400
-NUM_FILTERS = 32
+
 
 
 
@@ -24,11 +25,13 @@ def main():
         print('Loading Model...')
 
 
-        model_unet = keras.models.load_model(PATH_MODEL)
+        model_unet = keras.models.load_model(PATH_LRELU)
         gen_image_predictions_unet(model_unet, PATH_PREDICTION_DIR, *image_filenames_test)
+        print("images predicted!")
 
         # Generates the submission
         generate_submission(model_unet, PATH_SUBMISSION, 1, *image_filenames_predict)
+        print("csv file generated!")
 
 
 

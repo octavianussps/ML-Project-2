@@ -7,14 +7,18 @@ import matplotlib.pyplot as plt
 NUM_CHANNELS =3
 
         
+     
 def double_conv(data, out_channel):
     # convolution block, 2 conv layers with relu each
     conv = layers.Conv2D(filters=out_channel, kernel_size=3, padding='same')(data)
-    conv = layers.ReLU()(conv)
+    #conv = layers.ReLU()(conv)
+    conv = layers.LeakyReLU(alpha=0.3)(conv)
     conv = layers.Conv2D(filters=out_channel, kernel_size=3, padding='same')(conv)
-    conv = layers.ReLU()(conv)
+    #conv = layers.ReLU()(conv)
+    conv = layers.LeakyReLU(alpha=0.3)(conv)
     return conv
-
+    
+    
 def max_pool(data):        
     max_pooled = layers.MaxPooling2D(pool_size=(2, 2), strides=(2,2), padding="same")(data)
     return max_pooled
@@ -99,7 +103,8 @@ def unet_model(img_size, num_filters):
 def train(model, x_train, y_train, batch_size, num_epochs):
     """Optimize the model and return the model with the training F1-Score"""
     try:
-        checkpoint = ModelCheckpoint("../models/unetBestWeights.h5",monitor='loss',verbose =1,save_best_only = True,mode = 'auto',period = 5)
+       #checkpoint = ModelCheckpoint("../models/unetBestWeights.h5",monitor='loss',verbose =1,save_best_only = True,mode = 'auto',period = 5)
+        checkpoint = ModelCheckpoint("../models/unetLReLU.h5",monitor='loss',verbose =1,save_best_only = True,mode = 'auto',period = 5)
         history = model.fit(x_train, y_train, batch_size=batch_size, epochs=num_epochs, callbacks=[checkpoint], validation_split=0.1)
     except KeyboardInterrupt:
             pass
