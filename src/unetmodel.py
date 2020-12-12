@@ -21,6 +21,7 @@ def double_conv(data, out_channel):
     
 def max_pool(data):        
     max_pooled = layers.MaxPooling2D(pool_size=(2, 2), strides=(2,2), padding="same")(data)
+    max_pooled = layers.Dropout(0.5)(max_pooled)
     return max_pooled
 
 
@@ -38,6 +39,7 @@ def crop_img(tensor, target_tensor):
 
 def up_conv(data, out_channels):
     upconv = layers.Conv2DTranspose(filters=out_channels, kernel_size=2, strides=(2,2))(data)
+    upconv = layers.Dropout(0.5)(upconv)
     return upconv    
         
 def unet(data, num_filters):
