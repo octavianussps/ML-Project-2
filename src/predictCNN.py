@@ -8,7 +8,7 @@ PATH_WEIGHTS = '../models/weightsFinal.h5'
 PATH_PATCH = '../models/weightsPatch4.h5'
 PATH_TEST_DATA = '../data/test_set_images/'
 PATH_PREDICTION_DIR = '../data/predictions/'
-PATH_SUBMISSION = '../out/final_submission.csv'
+PATH_SUBMISSION = '../out/final_CNN_submission.csv'
 TEST_SIZE = 50
 
 

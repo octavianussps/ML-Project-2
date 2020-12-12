@@ -10,7 +10,7 @@ import sys
 PATH_LRELU = '../models/unetLReLU.h5'
 PATH_TEST_DATA = '../data/test_set_images/'
 PATH_PREDICTION_DIR = '../data/predictions/'
-PATH_SUBMISSION = '../out/submissionUnet.csv'
+PATH_SUBMISSION = '../out/final_UNET_submission.csv'
 TEST_SIZE = 50
 
 
