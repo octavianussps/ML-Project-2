@@ -22,9 +22,9 @@ We implement a Convolutional Neural Network using the sliding window Approach an
 |:--:|:--:|
 | `data/`  | test data |
 | `latex/` | contains the pdf and the latex report of our project |
-| `models/`  | the differents models we use |
+| `models/`  | constains the differents models we use |
 | `out/`  | contains the final submission files, also csv format |
-| `src/`  | all the python scripts we used in this project, further explanation below |
+| `src/`  | contains all the python scripts we used in this project, further explanation below |
 
 ### **In `src/` you can see:**
 
@@ -57,15 +57,17 @@ The code is tested with the following versions
 - `Matplotlib 3.1.x`
 - `TensorFlow 2.0`
 - `Pillow 6.2.xx`
+- `Scipy 1.5.x`
+- `scikit-learn 0.23.x`
+
 
 ### **Installation**
-Now, install the necessary data science libraries. Make sure to install them in order listed below.
+For the installation of the necessary data science libraries.
 
 ```
 conda install ipython
 conda install jupyter
 conda install -c conda-forge matplotlib
-conda install pandas
 conda install scipy
 conda install scikit-learn
 conda install -c anaconda pillow
