@@ -86,12 +86,12 @@ class CnnModel(keras.Model):
         # Prints a summary for the model
         self.model.summary()
 
-    def train_model(self, gt_imgs, tr_imgs, nb_epochs=100):
+    def train_model(self, x_train, y_train, nb_epochs=100):
         """
         Train the CNN model
         Inputs:
-           gt_imgs = ground truth images
-           tr_imgs = training images
+           x_train = training images
+           y_train = ground truth images
            nb_epoch = number of epoch for training
         
         Output:
@@ -99,14 +99,13 @@ class CnnModel(keras.Model):
         """
 
         np.random.seed(1234)  # for simulation, to set same number random value.
-        nb_images = tr_imgs.shape[0]
+        nb_images = x_train.shape[0]
 
         padding_size = (self.window_size - self.patch_size) // 2
         
         # pad images to b aple to apply sliding window approach to pixels clos to the border!
-        tr_imgs, gt_imgs = pad_images(tr_imgs, padding_size), pad_images(gt_imgs, padding_size)
-        #print("trimgshape",tr_imgs.shape)
-        #print("gtimgshape",gt_imgs.shape)
+        x_train, y_train = pad_images(x_train, padding_size), pad_images(y_train, padding_size)
+
         def generate_minibatch():
             """
             Procedure to generate real-time minibatch , preparing cropping random windows and corresponding patches
@@ -120,21 +119,21 @@ class CnnModel(keras.Model):
                 for i in range(self.batch_size):
                     # Select a random image
                     idx = np.random.choice(nb_images)
-                    tr_img = tr_imgs[idx]
-                    gt_img = gt_imgs[idx]
+                    x_img = x_train[idx]
+                    y_img = y_train[idx]
 
-                    shape = tr_img.shape
+                    shape = x_img.shape
 
                     # Sample a random window from the image, center is the pixel in the center
                     center = np.random.randint(self.window_size // 2, shape[0] - self.window_size // 2, 2)
                     
                     # x range = center +/- half window
                     # y range analogously
-                    window = tr_img[center[0] - self.window_size // 2:center[0] + self.window_size // 2,
+                    window = x_img[center[0] - self.window_size // 2:center[0] + self.window_size // 2,
                              center[1] - self.window_size // 2:center[1] + self.window_size // 2]
                     
                     # Find the corresponding ground truth patch: 16x16 pixels
-                    gt_patch = gt_img[center[0] - self.patch_size // 2:center[0] + self.patch_size // 2,
+                    gt_patch = y_img[center[0] - self.patch_size // 2:center[0] + self.patch_size // 2,
                                center[1] - self.patch_size // 2:center[1] + self.patch_size // 2]
                    
                     # x_batch is the input
@@ -146,7 +145,7 @@ class CnnModel(keras.Model):
                 yield x_batch, y_batch
 
         # Number of windows fed to the model per epoch
-        samples_per_epoch = tr_imgs.shape[0] * tr_imgs.shape[1] * tr_imgs.shape[2] // (
+        samples_per_epoch = x_train.shape[0] * x_train.shape[1] * x_train.shape[2] // (
                 self.patch_size ** 2 * self.batch_size)
 
         print("samples per epoch %d" % samples_per_epoch)
