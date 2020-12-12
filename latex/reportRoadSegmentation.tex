@@ -57,7 +57,7 @@
 
 \section{Introduction}
 \vspace{0.3cm}
-Image segmentation is a well known task in the field of Deep Learning which can be handled by Neural Networks. There exist different approaches such as Convolutional Neural Networks (\cite{pixelwise}) or newer ones such as the U-Net (\cite{unet}) which both yield good results according to our research. We decided to implement a Convolutional Neural Network,  since it seemed very natural to us to classify patces of the image by taken into account their context inside the image. We additionally implemented the U-Net in order to compare its performance to the CNN. 
+Image segmentation is a well known task in the field of Deep Learning which can be handled by Neural Networks. There exist different approaches such as Convolutional Neural Networks (\cite{pixelwise}) or newer ones such as the U-Net (\cite{unet}) which both yield good results according to our research. We decided to implement a Convolutional Neural Network,  since it seemed very natural to us to classify patches of the image by taken into account their context inside the image. We additionally implemented the U-Net in order to compare its performance to the CNN. 
 \\\\In this report we start explaining our methods, i.e. description of the classification task/regression task and doing data augmentation.  Then we present the network structure, the training process as well as tuning of the hyperparameters. With this trained network we predict on the test data and then present our results obtained with both networks. We conclude with a discussion and summarize our results.
 
 \vspace{0.5cm}
@@ -75,7 +75,7 @@ Our Convolutional Neural Net takes as input parts of the image of size 72x72, so
 \end{figure}
 \\
 This corresponds to the label 1 and hence will be white in the predicted label.  Otherwise it should be [1,0] and the patch in the label will be black. This is illustrated in Figure 1. 
-The idea behind this approach is, that the patch in the center is classified by taken into consideration the surrounding of this patch. Intuitively speaken, if we have a lot of vehicles near or in the patch, it is more likely that the patch belongs to road. Conversely, if there are buildings everywhere around the patch, the patch also belongs to background with high probability. Each patch hence is classified by its context in the image. 
+The idea behind this approach is, that the patch in the center is classified by taken into consideration the surrounding of this patch. Intuitively spoken, if we have a lot of vehicles near or in the patch, it is more likely that the patch belongs to road. Conversely, if there are buildings everywhere around the patch, the patch also belongs to background with high probability. Each patch hence is classified by its context in the image. 
 \subsection{Regression Task}
 The U-Net takes as input the whole 400x400 RGB image. It outputs the 400x400 binary image, which is supposed to segment correctly the roads from the background.
 \begin{figure}[htbp]
@@ -89,7 +89,7 @@ The U-Net takes as input the whole 400x400 RGB image. It outputs the 400x400 bin
 
 The training data consists of 100 RGB satellite images of size 400x400 and their groundtruths, 400x400 binary images respectively. 
 Obviously this classification task described above is not easy to handle. Sometimes roads are hidden by a tree, or s may drive on them and many other difficulties could arise. 
-We therefore augment our training data in order to achieve better results. We rotate each image and its groundtruth by 15, 30, 45, 60, 90, 100, 180 and 270 degrees. We reflect the images along their boundary axes. Then we crop out images of size 400x400 to get training images and groundtruths in the same size as the 'original' training data. This is illustrated in Figure 2. By doing so we augment the amount of training data by a factor of 9.
+We therefore augment our training data in order to achieve better results. We rotate each image and its groundtruth by 15, 30, 45, 60, 90, 100, 180 and 270 degrees. We reflect the images along their boundary axes. Then we crop out images of size 400x400 to get training images and groundtruths in the same size as the 'original' training data. This is illustrated in Figure 3. By doing so we augment the amount of training data by a factor of 9.
 
 %	\includegraphics[width=4cm]{images/data_augment.png}
 %	\caption{'Original' training image and groundtruth.}
@@ -128,7 +128,7 @@ We therefore augment our training data in order to achieve better results. We ro
 \subsubsection{Convolutional Neural Network}
 \label{cnn}
 
-With aim of classifying the whole image and not just one patch, we make use of the so called 'sliding window' approach that is illustrated in Figure 3.
+With aim of classifying the whole image and not just one patch, we make use of the so called 'sliding window' approach that is illustrated in Figure 4.
 
 
 \begin{figure}[htbp]
@@ -139,7 +139,7 @@ With aim of classifying the whole image and not just one patch, we make use of t
 	\label{fig:slidwindo}
 \end{figure}
 
-In order to apply this technique to patches near the border, we have to enlarge the images. We therefore choose a padding method: At the border we reflect each image along its boundary axes. Then we move the window through the whole image. For each window we classify the label of the patch in the center. 
+In order to apply this technique into the patches near the border, we have to enlarge the images. We therefore choose a padding method: At the border we reflect each image along its boundary axes. Then we move the window through the whole image. For each window we classify the label of the patch in the center. 
 \\
 
 
@@ -177,7 +177,7 @@ The architecture of our first Convolutional Neural Net is displayed in Table 1. 
 
 \subsubsection{U-Net}
 
-Figure 4 is taken from \cite{unet} and demonstrates the architecture of the U-Net. 
+Figure 5 is taken from \cite{unet} and demonstrates the architecture of the U-Net. 
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=8cm]{images/unet.png}
@@ -196,7 +196,7 @@ The decoder consists of upconvolutional layers which combine the features from t
 
 \subsubsection{Convolutional Neural Network}
 In the training process we randomly choose a window of an image of the training data. We then compute the corresponding patch of the groundtruth image. The groundtruth label is then given by the mean of all pixels in this patch: If it is higher than a certain threshold, 0.25 in our case, then the label will be 1, otherwise 0.\\
-By doing so we get even much more training data since each window of each image actually  corresponds to one training image. \\We tuned the following hyperparameters: the parameter  $\alpha$ for the Leaky Relu Function $f(x)=max(x,\alpha x)$, the dropout probability, window size, patch size. \\
+By doing so we get even much more training data since each window of each image actually  corresponds to one training image. \\We tuned the following hyperparameters: the parameter  $\alpha$ for the Leaky Relu Function $f(x)=max(x,\alpha x)$, the dropout probability, window size, and patch size. \\
 
 \subsubsection{U-Net}
 Training with the U-Net is done directly. We feed in the test images and the groundtruths are already given as the 400x400 binary images. In this model we tuned the following hyperparameters: the parameter  $\alpha$ for the Leaky Relu Function $f(x)=max(x,\alpha x)$, the dropout probability, the filter size. \\
@@ -247,7 +247,7 @@ Two test images and their predictions obtained by CNN are displayed in Figure 6 
 	\caption{Test image 9 and its prediction.}
 \end{figure}
 
-In general the roads are well segmented from the background. In Figure 4 the network was able to recognize the roads, although on the right they were hidden by some trees. It also did not misclassify the parking lot as road. The small part of road on the bottom left was also correctly classified, unfortunately not that smoothly due to the patch size. In Figure 5 one can see some misclassified patches on the highway, although the rails and the parking lot were correcty labelled as background. Also in this case all roads were well detected in general. The CNN performs quite good. As one can observe, a window size of 72x72 and patch size of 16x16 doesn't give very smooth predictions. This is obviously caused by the fact, that we predict one label for a whole patch. If one chooses smaller patches, one will get smoother results. This can be seen in Figure 8. In the smoother case we chose a window size of 16x16 and patch size 4x4. AICrowd expects labels for patches of size 16x16. Therefore in the latter case we computed the mean over 16 smaller patches of size 4x4 to compute the label for the 16x16 patch in which the smaller patches are lying inside. 
+In general the roads are well segmented from the background. In Figure 6 the network was able to recognize the roads, although on the right they were hidden by some trees. It also did not misclassify the parking lot as road. The small part of road on the bottom left was also correctly classified, unfortunately not that smoothly due to the patch size. In Figure 7 one can see some misclassified patches on the highway, although the rails and the parking lot were correcty labelled as background. Also in this case all roads were well detected in general. The CNN performs quite good. As one can observe, a window size of 72x72 and patch size of 16x16 doesn't give very smooth predictions. This is obviously caused by the fact, that we predict one label for a whole patch. If one chooses smaller patches, one will get smoother results. This can be seen in Figure 8. In the smoother case we chose a window size of 16x16 and patch size 4x4. AICrowd expects labels for patches of size 16x16. Therefore in the latter case we computed the mean over 16 smaller patches of size 4x4 to compute the label for the 16x16 patch in which the smaller patches are lying inside. 
 \begin{figure}[htbp]
 	\centering
 	\begin{subfigure}[b]{0.15\textwidth}
