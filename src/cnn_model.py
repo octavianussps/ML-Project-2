@@ -21,19 +21,19 @@ class CnnModel(keras.Model):
     	  pool = polling dimension
     	  stride = stride dimension
     	"""
-        super(CnnModel, self).__init__()
-        keras.backend.set_image_data_format('channels_last')
-        self.batch_size = 256
-        self.patch_size = 16
-        self.window_size = 72 
-        self.channels = 3 
-        self.nb_classes = 2  # black and white labeling
-        self.alpha = 0.1  # leaky relu parameter
-        self.dropout_prob = 0.25  # random dropout parameter
-        self.regularization_value = 1e-6  # regularization value
-        self.pool = (2,2)
-        self.stride = (1,1)
-        self.create_model()
+    	super(CnnModel, self).__init__()
+    	keras.backend.set_image_data_format('channels_last')
+    	self.batch_size = 256
+    	self.patch_size = 16
+    	self.window_size = 72
+    	self.channels = 3 
+    	self.nb_classes = 2  # black and white labeling
+    	self.alpha = 0.1  # leaky relu parameter
+    	self.dropout_prob = 0.25  # random dropout parameter
+    	self.regularization_value = 1e-6  # regularization value
+    	self.pool = (2,2)
+    	self.stride = (1,1)
+    	self.create_model()
 
     def create_model(self):
         """Define the layer for CNN Model architecture composed of convulation layers, dense layer and apply activation function, optimizer, and loss
