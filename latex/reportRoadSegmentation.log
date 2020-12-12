@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.6.4)  7 DEC 2020 21:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.6.4)  12 DEC 2020 17:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -742,85 +742,87 @@ Package: ltcaption 2018/08/26 v1.4a longtable captions (AR)
 Package caption Info: End \AtBeginDocument code.
 
 ABD: EveryShipout initializing macros
+Underfull \hbox (badness 3482) in paragraph at lines 60--62
+\T1/lmr/m/n/10 a Con-vo-lu-tional Neu-ral Net-work, since it seemed
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 60--62
 
  []
 
 
-Underfull \hbox (badness 3260) in paragraph at lines 60--62
-\T1/lmr/m/n/10 We start ex-plain-ing our meth-ods, i.e. de-scrip-tion
+Underfull \hbox (badness 4048) in paragraph at lines 60--62
+\T1/lmr/m/n/10 In this re-port we start ex-plain-ing our meth-ods,
  []
 
-<images/classificationTask.png, id=53, 1170.3725pt x 506.89375pt>
+<images/classificationTask.png, id=89, 1170.3725pt x 506.89375pt>
 File: images/classificationTask.png Graphic file (type png)
 <use images/classificationTask.png>
 Package pdftex.def Info: images/classificationTask.png  used on input line 71.
 (pdftex.def)             Requested size: 170.71652pt x 73.93471pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 80--81
-
- []
-
-<images/data_augment.png, id=55, 803.0pt x 401.5pt>
+<images/data_augment.png, id=91, 803.0pt x 401.5pt>
 File: images/data_augment.png Graphic file (type png)
 <use images/data_augment.png>
-Package pdftex.def Info: images/data_augment.png  used on input line 104.
+Package pdftex.def Info: images/data_augment.png  used on input line 103.
 (pdftex.def)             Requested size: 119.50148pt x 59.75066pt.
 
-Overfull \hbox (18.32503pt too wide) in paragraph at lines 104--105
+Overfull \hbox (18.32503pt too wide) in paragraph at lines 103--104
 [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 105--105
+Underfull \hbox (badness 10000) in paragraph at lines 104--104
 []\T1/lmr/m/n/9 (a) |'Orig-i-nal' train-ing
  []
 
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
-07.
+06.
 (/usr/share/texmf/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
-07.
+06.
 
 (/usr/share/texmf/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-107.
+106.
 
 (/usr/share/texmf/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-107.
+106.
 
 (/usr/share/texmf/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 107.
+(Font)              <10> on input line 106.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 107.
+(Font)              <7> on input line 106.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 107.
-<images/data_augment_rot.png, id=56, 803.0pt x 401.5pt>
+(Font)              <5> on input line 106.
+<images/data_augment_rot.png, id=92, 803.0pt x 401.5pt>
 File: images/data_augment_rot.png Graphic file (type png)
 <use images/data_augment_rot.png>
-Package pdftex.def Info: images/data_augment_rot.png  used on input line 110.
+Package pdftex.def Info: images/data_augment_rot.png  used on input line 109.
 (pdftex.def)             Requested size: 119.50148pt x 59.75066pt.
 
-Overfull \hbox (18.32503pt too wide) in paragraph at lines 110--111
+Overfull \hbox (18.32503pt too wide) in paragraph at lines 109--110
 [][] 
  []
 
-[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
- <./images/classificationTask.png> <./images/data_augment.png> <./images/data_a
-ugment_rot.png>]
-<images/slidingwindow.png, id=78, 1092.08pt x 573.14125pt>
+ <./images/classificationTask.png>]
+<images/slidingwindow.png, id=110, 1092.08pt x 573.14125pt>
 File: images/slidingwindow.png Graphic file (type png)
 <use images/slidingwindow.png>
 Package pdftex.def Info: images/slidingwindow.png  used on input line 129.
@@ -830,79 +832,167 @@ Underfull \hbox (badness 10000) in paragraph at lines 135--137
 
  []
 
-[2 <./images/slidingwindow.png>]
-<images/visualize_pred/images/test_2.png, id=91, 610.28pt x 610.28pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 169--171
+
+ []
+
+<images/unet.png, id=112, 1560.83125pt x 1039.885pt>
+File: images/unet.png Graphic file (type png)
+<use images/unet.png>
+Package pdftex.def Info: images/unet.png  used on input line 176.
+(pdftex.def)             Requested size: 227.62204pt x 151.64423pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 190--192
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 194--195
+\T1/lmr/m/n/10 model we tuned the fol-low-ing hy-per-pa-ram-e-ters:
+ []
+
+
+Underfull \hbox (badness 7273) in paragraph at lines 194--195
+\T1/lmr/m/n/10 the pa-ram-e-ter $\OML/lmm/m/it/10 $ \T1/lmr/m/n/10 for the Lea
+ky Relu Func-tion
+ []
+
+
+Underfull \hbox (badness 2158) in paragraph at lines 194--195
+\OML/lmm/m/it/10 f\OT1/lmr/m/n/10 (\OML/lmm/m/it/10 x\OT1/lmr/m/n/10 ) = \OML/l
+mm/m/it/10 max\OT1/lmr/m/n/10 (\OML/lmm/m/it/10 x; x\OT1/lmr/m/n/10 )$\T1/lmr/
+m/n/10 , the dropout prob-a-bil-ity, the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 194--195
+
+ []
+
+[2 <./images/data_augment.png> <./images/data_augment_rot.png> <./images/slidin
+gwindow.png> <./images/unet.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 197--198
+
+ []
+
+
+Underfull \hbox (badness 2582) in paragraph at lines 200--202
+\T1/lmr/m/n/10 im-ages by a padding method sim-i-lar to the one
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 200--202
+
+ []
+
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 211.
+
+<images/visualize_pred/images/test_2.png, id=129, 610.28pt x 610.28pt>
 File: images/visualize_pred/images/test_2.png Graphic file (type png)
 <use images/visualize_pred/images/test_2.png>
 Package pdftex.def Info: images/visualize_pred/images/test_2.png  used on input
- line 214.
+ line 216.
 (pdftex.def)             Requested size: 119.50148pt x 119.50232pt.
 
-Overfull \hbox (18.32503pt too wide) in paragraph at lines 214--216
+Overfull \hbox (18.32503pt too wide) in paragraph at lines 216--218
 [][]
  []
 
-<images/visualize_pred/groundtruth/pred_2.png, id=92, 439.4016pt x 439.4016pt>
+<images/visualize_pred/groundtruth/pred_2.png, id=130, 439.4016pt x 439.4016pt>
+
 File: images/visualize_pred/groundtruth/pred_2.png Graphic file (type png)
 <use images/visualize_pred/groundtruth/pred_2.png>
 Package pdftex.def Info: images/visualize_pred/groundtruth/pred_2.png  used on 
-input line 219.
+input line 221.
 (pdftex.def)             Requested size: 119.50148pt x 119.49821pt.
 
-Overfull \hbox (18.32503pt too wide) in paragraph at lines 219--221
+Overfull \hbox (18.32503pt too wide) in paragraph at lines 221--223
 [][]
  []
 
-<images/visualize_pred/images/test_9.png, id=93, 610.28pt x 610.28pt>
+<images/visualize_pred/images/test_9.png, id=131, 610.28pt x 610.28pt>
 File: images/visualize_pred/images/test_9.png Graphic file (type png)
 <use images/visualize_pred/images/test_9.png>
 Package pdftex.def Info: images/visualize_pred/images/test_9.png  used on input
- line 229.
+ line 231.
 (pdftex.def)             Requested size: 119.50148pt x 119.50232pt.
 
-Overfull \hbox (18.32503pt too wide) in paragraph at lines 229--231
+Overfull \hbox (18.32503pt too wide) in paragraph at lines 231--233
 [][]
  []
 
-<images/visualize_pred/groundtruth/pred_9.png, id=94, 439.4016pt x 439.4016pt>
+<images/visualize_pred/groundtruth/pred_9.png, id=132, 439.4016pt x 439.4016pt>
+
 File: images/visualize_pred/groundtruth/pred_9.png Graphic file (type png)
 <use images/visualize_pred/groundtruth/pred_9.png>
 Package pdftex.def Info: images/visualize_pred/groundtruth/pred_9.png  used on 
-input line 234.
+input line 236.
 (pdftex.def)             Requested size: 119.50148pt x 119.49821pt.
 
-Overfull \hbox (18.32503pt too wide) in paragraph at lines 234--236
+Overfull \hbox (18.32503pt too wide) in paragraph at lines 236--238
 [][]
  []
 
 
-Underfull \hbox (badness 1400) in paragraph at lines 240--241
+Underfull \hbox (badness 1400) in paragraph at lines 242--243
 \T1/lmr/m/n/10 back-ground. In Fig-ure 4 the net-work was able to
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 240--241
+Underfull \hbox (badness 10000) in paragraph at lines 242--243
 
  []
 
-<images/visualize_pred/test_10.png, id=95, 610.28pt x 610.28pt>
+<images/visualize_pred/test_10.png, id=133, 610.28pt x 610.28pt>
 File: images/visualize_pred/test_10.png Graphic file (type png)
 <use images/visualize_pred/test_10.png>
 Package pdftex.def Info: images/visualize_pred/test_10.png  used on input line 
-246.
+248.
 (pdftex.def)             Requested size: 75.8804pt x 75.87508pt.
-<images/visualize_pred/pred_10.png, id=96, 439.4016pt x 439.4016pt>
+<images/visualize_pred/pred_10.png, id=134, 439.4016pt x 439.4016pt>
 File: images/visualize_pred/pred_10.png Graphic file (type png)
 <use images/visualize_pred/pred_10.png>
 Package pdftex.def Info: images/visualize_pred/pred_10.png  used on input line 
-249.
+251.
 (pdftex.def)             Requested size: 75.8804pt x 75.8773pt.
-<images/visualize_pred/pred_patch_10.png, id=97, 439.4016pt x 439.4016pt>
+<images/visualize_pred/pred_patch_10.png, id=135, 439.4016pt x 439.4016pt>
 File: images/visualize_pred/pred_patch_10.png Graphic file (type png)
 <use images/visualize_pred/pred_patch_10.png>
 Package pdftex.def Info: images/visualize_pred/pred_patch_10.png  used on input
- line 252.
+ line 254.
 (pdftex.def)             Requested size: 75.8804pt x 75.8773pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 260--261
+
+ []
+
+<images/test_10.png, id=136, 610.28pt x 610.28pt>
+File: images/test_10.png Graphic file (type png)
+<use images/test_10.png>
+Package pdftex.def Info: images/test_10.png  used on input line 268.
+(pdftex.def)             Requested size: 119.50148pt x 119.50232pt.
+
+Overfull \hbox (18.32503pt too wide) in paragraph at lines 268--270
+[][]
+ []
+
+<images/pred_10_unet.png, id=137, 610.28pt x 610.28pt>
+File: images/pred_10_unet.png Graphic file (type png)
+<use images/pred_10_unet.png>
+Package pdftex.def Info: images/pred_10_unet.png  used on input line 273.
+(pdftex.def)             Requested size: 119.50148pt x 119.50232pt.
+
+Overfull \hbox (18.32503pt too wide) in paragraph at lines 273--275
+[][]
+ []
+
+[3 <./images/visualize_pred/images/test_2.png> <./images/visualize_pred/groundt
+ruth/pred_2.png> <./images/visualize_pred/images/test_9.png> <./images/visualiz
+e_pred/groundtruth/pred_9.png> <./images/visualize_pred/test_10.png> <./images/
+visualize_pred/pred_10.png> <./images/visualize_pred/pred_patch_10.png>]
 (./reportRoadSegmentation.bbl)
 
 ** Conference Paper **
@@ -915,26 +1005,25 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[3 <./images/visualize_pred/images/test_2.png> <./images/visualize_pred/groundt
-ruth/pred_2.png> <./images/visualize_pred/images/test_9.png> <./images/visualiz
-e_pred/groundtruth/pred_9.png> <./images/visualize_pred/test_10.png> <./images/
-visualize_pred/pred_10.png> <./images/visualize_pred/pred_patch_10.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 297.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 297.
+[4
+
+ <./images/test_10.png> <./images/pred_10_unet.png (PNG copy)>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 318.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 318.
 
 (./reportRoadSegmentation.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 297.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 297.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 318.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 318.
 Package rerunfilecheck Info: File `reportRoadSegmentation.out' has not changed.
 
-(rerunfilecheck)             Checksum: 1FC586C5521CBB2470B623DB36316EEC;590.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 297.
+(rerunfilecheck)             Checksum: 9E40854DF6360420E688DC73DFCE86FF;1260.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 318.
  ) 
 Here is how much of TeX's memory you used:
- 18188 strings out of 483089
- 346755 string characters out of 5962869
- 580817 words of memory out of 5000000
- 32812 multiletter control sequences out of 15000+600000
+ 18229 strings out of 483089
+ 347545 string characters out of 5962869
+ 580192 words of memory out of 5000000
+ 32840 multiletter control sequences out of 15000+600000
  717151 words of font info for 117 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  60i,9n,60p,971b,429s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -947,10 +1036,10 @@ c10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></usr/share/texmf/fo
 nts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb
 ></usr/share/texmf/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1
 /public/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/lmri12.pfb>
-Output written on reportRoadSegmentation.pdf (3 pages, 5330132 bytes).
+Output written on reportRoadSegmentation.pdf (4 pages, 6382269 bytes).
 PDF statistics:
- 159 PDF objects out of 1000 (max. 8388607)
- 122 compressed objects within 2 object streams
- 27 named destinations out of 1000 (max. 500000)
- 156 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 208 PDF objects out of 1000 (max. 8388607)
+ 167 compressed objects within 2 object streams
+ 38 named destinations out of 1000 (max. 500000)
+ 243 words of extra memory for PDF output out of 10000 (max. 10000000)
 
