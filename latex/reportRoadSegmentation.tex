@@ -89,7 +89,7 @@ The U-Net takes as input the whole 400x400 RGB image. It outputs the 400x400 bin
 
 The training data consists of 100 RGB satellite images of size 400x400 and their groundtruths, 400x400 binary images respectively. 
 Obviously this classification task described above is not easy to handle. Sometimes roads are hidden by a tree, or s may drive on them and many other difficulties could arise. 
-We therefore augment our training data in order to achieve better results. We rotate each image and its groundtruth by 15, 30, 45, 60, 90, 100, 180 and 270 degrees. We reflect the images along their boundary axes. Then we crop out images of size 400x400 to get training images and groundtruths in the same size as the 'original' training data. This is illustrated in Figure 2. By doing so we augment the amount of training data by a factor of 9.
+We therefore augment our training data in order to achieve better results. We rotate each image and its groundtruth by 15, 30, 45, 60, 90, 100, 180 and 270 degrees. We reflect the images along their boundary axes. Then we crop out images of size 400x400 to get training images and groundtruths in the same size as the 'original' training data. This is illustrated in Figure 3. By doing so we augment the amount of training data by a factor of 9.
 
 %	\includegraphics[width=4cm]{images/data_augment.png}
 %	\caption{'Original' training image and groundtruth.}
