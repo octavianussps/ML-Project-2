@@ -29,4 +29,8 @@ S.~Bittel, V.~Kaiser, M.~Teichmann, and M.~Thoma, ``Pixel-wise segmentation of
 O.~Ronneborger, P.~Fischer, and T.~Brox, ``U-net: Convolutional networks for
   biomedical image segmentation,'' 2015, https://arxiv.org/abs/1505.04597.
 
+\bibitem{lstm}
+Y.~Lyu, L.~Bai, and X.~Huang, ``Road segmentation using cnn and distributed
+  lstm,'' 2019, https://arxiv.org/pdf/1808.04450.pdf.
+
 \end{thebibliography}

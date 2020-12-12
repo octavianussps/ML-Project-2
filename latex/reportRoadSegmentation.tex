@@ -53,7 +53,7 @@
 \maketitle
 
 \begin{abstract}
-	The goal of this project is to implement and train a Neural Network that is able to segment satellite images into roads and background. We implement a Convolutional Neural Network using the sliding window Approach and a U-Net in order to tackle this task. The U-Net gave us a F1-score of 0.898 as the best result.\end{abstract}
+	The goal of this project is to implement and train a Neural Network that is able to segment satellite images into roads and background. We implement a Convolutional Neural Network using the sliding window approach and a U-Net in order to tackle this task. The U-Net gave us a F1-score of 0.898 as the best result.\end{abstract}
 
 \section{Introduction}
 \vspace{0.3cm}
@@ -289,10 +289,9 @@ The final results for both Convolutional Neural Networks and the U-Net are displ
 		\hline
 		\textbf{Model}&\textbf{F1-Score}&\textbf{Accuracy}\\
 		\hline
-		\textbf{CNN}, 16x16 window, 4x4 patch&0.741&0.883\\
-	 	\textbf{CNN}, 72x72 window, 16x16 patch&0.882&0.983\\
-	 	\textbf{CNN 2}, 128x128 window, 16x16 patch&0.862&0.924\\
-		\textbf{U-Net}, dropout = 0.5, LReLu = 0.3 &0.898&0.947\\
+		\textbf{CNN}&0.882&0.983\\
+		\textbf{CNN 2}&0.862&0.924\\
+		\textbf{U-Net}&0.898&0.947\\
 		\hline
 	\end{tabular}
 	\caption{Results.}
@@ -305,8 +304,8 @@ The final results for both Convolutional Neural Networks and the U-Net are displ
 \vspace{0.5cm}
 \section{Discussion}
 \vspace{0.3cm}
-Both, the CNN and the U-Net are performing quite good result while predicted on AICrowd. To even obtain better results we could have augment the data more by adding some random noise on the train images. We could have also use other techniques like changing some pixel values randomly. 
-Concerning network structure, we found out that the Leaky ReLU function is well suited for both models. The added dropout and max pool operations were quite important to avoid overfitting. In the U-Net model we could have changed the depth of the convolutional layer. We used 32 compared to 64 proposed in the paper \cite{unet}. But this would also mean very high computational costs, since our model already contains more than 7 million trainable parameters. The encoder part of out U-Net is a simple CNN. One could also use other encoders containging residual blocks instead, which might perform better. In terms of neural network architecture, we could have implemented distributed LSTM to our model as cite in \cite{lstm} to extract the feature for long spatial data 
+Both, the CNN and the U-Net are performing quite good result while predicted on AICrowd. To even obtain better results we could have augment the data more by adding some random noise on the train images. We could have also used other techniques like changing some pixel values randomly. 
+Concerning network structure, we found out that the Leaky ReLU function is well suited for both models. The added dropout and max pool operations were quite important to avoid overfitting. In the U-Net model we could have changed the depth of the convolutional layer. We used 32 compared to 64 proposed in the paper \cite{unet}. But this would also mean very high computational costs, since our model already contains more than 7 million trainable parameters. The encoder part of out U-Net is a simple CNN. One could also use other encoders containing residual blocks instead, which might perform better or a distributed LSTM to our model as described in \cite{lstm} to extract the features for long spatial data.
 
 \vspace{0.5cm}
 \section{Summary}
