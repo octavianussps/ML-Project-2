@@ -12,9 +12,9 @@ The detailed explanation of the project is on the report (`latex/report.pdf`).
 ## **Description**
 
 This project was part of a challenge from EPFL course Machine Learning CS-433 and was hosted on the platform AIcrowd.
-There are a set of satellite/aerial images acquired from GoogleMaps and ground-truth images where each pixel is labeled as {road, background}. The objective is to train a classifier to segment roads in these images, i.e. assign a label {road=1, background=0} to each patch of pixel size 16x16.
+There are a set of satellite/aerial images acquired from GoogleMaps and ground-truth images where each pixel is labeled as {road, background}. The objective is to train a classifier to segment roads in these images, i.e. assign a label {road=1, background=0} to each patch of pixel size 16 x 16.
 
-
+We implement a Convolutional Neural Network using the sliding window Approach and a U-Net in order totackle this task. The U-Net gave us a F1-score of 0.898 as the best result.
 
 ## **Project structure**
 
@@ -38,8 +38,15 @@ In `src/` you can see:
 
 + `visualisation` is a folder containing some notebooks to help for the visualization
 
+In `models/` you can see:
++ `unetLReLU.h5` : the final U-NET model with Leaky ReLU
++ `weightsFinal.h5` : the final CNN model
++ `weightsSimpleNetworkBigPatch.h5` : the CNN model with less filters in each layers
   
-
+In `out/` you can see:
++ `final_UNET_submission.csv` : the final U-NET submission files with Leaky ReLU with F1-score of 0.898 and the accuracy of 0.947
++ `final_CNN_submission.csv` : the final CNN submission files with F1-score of 0.882 and the accuracy of 0.938
++ `final_small_CNN_submission.csv` : the CNN submission files with less filters in each layers with F1-score of 0.862 and the accuracy of 0.924
 
 
 ## **Prerequisites**
@@ -70,7 +77,7 @@ pip install --upgrade keras
 ## **Dataset**
 We did not put the trainig data in the github because it takes too much memory place.
 In https://www.aicrowd.com/challenges/epfl-ml-road-segmentation you will find the training set consisting of images with their ground truth and the test set where we did our predictions on. 
-Download it and put it in the folder named `data`.
+Download it and put it in the folder named `data/`.
 
 
 ## **Running**
