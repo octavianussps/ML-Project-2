@@ -88,7 +88,7 @@ class CnnModel(keras.Model):
         self.model.summary()
 
 
-    def generate_minibatch(x_train,y_train, nb_images):
+    def generate_minibatch(self,x_train, y_train, nb_images):
         """
         Generates training data by cropping windows of the training images and computing their
         corresponding groundtruth window
@@ -164,7 +164,7 @@ class CnnModel(keras.Model):
                                                       mode='auto')
         history = None
         try:
-            history = self.model.fit_generator(generate_minibatch(x_train,y_train, nb_images),
+            history = self.model.fit_generator(generate_minibatch(x_train, y_train, nb_images),
                                                steps_per_epoch=samples_per_epoch,
                                                epochs=nb_epochs,
                                                verbose=1,
