@@ -5,10 +5,12 @@ from helpers import *
 import matplotlib.pyplot as plt
 
 NUM_CHANNELS =3
-
         
      
 def double_conv(data, out_channel):
+"""
+
+"""
     # convolution block, 2 conv layers with relu each
     conv = layers.Conv2D(filters=out_channel, kernel_size=3, padding='same')(data)
     #conv = layers.ReLU()(conv)
