@@ -16,16 +16,20 @@ The detailed explanation of the project is on the report (`latex/report.pdf`).
 |:--:|:--:|
 | `data/`  | test data |
 | `latex/` | contains the pdf and the latex report of our project |
-| `models/`  | the models we use |
+| `models/`  | the differents models we use |
 | `out/`  | contains the final submission files, also csv format |
 | `src/`  | all the python scripts we used in this project, further explanation below |
 
 In `src/` you can see:
 
-+ `run.py` is a script which produces the submission.csv file for the test data.
-+ `cnn_model.py` contains several functions to build the cnn 
++ `run.py` is a script which produces the `final_UNET_submission.csv` file for the test data with the UNET model
++ `unetmodel_training.py` is a script to train the UNET using the training data 
++ `unetmodel.py` contains several functions to build the unet model 
++ `predictCNN.py` is a script which produces the `final_CNN_submission.csv` file for the test data with the CNN model
++ `cnnmodel_training.py` is a script to train the cnn using the training data 
++ `cnn_model.py` contains several functions to build the cnn model
 + `helpers.py` contains several helper functions in order to run the cnn 
-+ `train.py` is a script to train the cnn using the training data 
+
 + `visualisation` is a folder containing some notebooks to help for the visualization
 
   
@@ -67,9 +71,9 @@ Download it and put it in the folder named `data`.
 
 
 ## **Running**
-In order to submit the predictions we give on the test data, you have to run the `run.py` file. It will build the model and load the trained weights. Then the model will predict on the test data and the `out/submission.csv` file will be generated.
+In order to submit the predictions we give on the test data, you have to run the `run.py` file. It will run the unet model. It will load the unet model with the trained weights already build in `cnnmodel_training.py` . Then the model will predict on the test data and the `out/submission.csv` file will be generated.
 
 
 ## **Results**
 
-We achieved a F1- score of 0.882 and the accuracy of 0.938 on the website. All the details are in the report.
+We achieved a F1-score of 0.898 and the accuracy of 0.947 on the website using the unet model. All the details are in the report.
