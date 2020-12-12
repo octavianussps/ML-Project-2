@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.6.4)  12 DEC 2020 17:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.6.4)  12 DEC 2020 19:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -835,7 +835,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 142--144
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 176--178
+Underfull \hbox (badness 10000) in paragraph at lines 146--148
 
  []
 
@@ -845,66 +845,69 @@ File: images/unet.png Graphic file (type png)
 Package pdftex.def Info: images/unet.png  used on input line 183.
 (pdftex.def)             Requested size: 227.62204pt x 151.64423pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 197--199
+Underfull \hbox (badness 10000) in paragraph at lines 198--200
 
  []
 
-[2 <./images/data_augment.png> <./images/data_augment_rot.png> <./images/slidin
-gwindow.png> <./images/unet.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 201--202
+
+Underfull \vbox (badness 1337) has occurred while \output is active []
+
+ [2 <./images/data_augment.png> <./images/data_augment_rot.png> <./images/slidi
+ngwindow.png> <./images/unet.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 202--203
 \T1/lmr/m/n/10 model we tuned the fol-low-ing hy-per-pa-ram-e-ters:
  []
 
 
-Underfull \hbox (badness 7273) in paragraph at lines 201--202
+Underfull \hbox (badness 7273) in paragraph at lines 202--203
 \T1/lmr/m/n/10 the pa-ram-e-ter $\OML/lmm/m/it/10 $ \T1/lmr/m/n/10 for the Lea
 ky Relu Func-tion
  []
 
 
-Underfull \hbox (badness 2158) in paragraph at lines 201--202
+Underfull \hbox (badness 2158) in paragraph at lines 202--203
 \OML/lmm/m/it/10 f\OT1/lmr/m/n/10 (\OML/lmm/m/it/10 x\OT1/lmr/m/n/10 ) = \OML/l
 mm/m/it/10 max\OT1/lmr/m/n/10 (\OML/lmm/m/it/10 x; x\OT1/lmr/m/n/10 )$\T1/lmr/
 m/n/10 , the dropout prob-a-bil-ity, the
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 201--202
+Underfull \hbox (badness 10000) in paragraph at lines 202--203
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 204--205
+Underfull \hbox (badness 10000) in paragraph at lines 205--206
 
  []
 
 
-Underfull \hbox (badness 2582) in paragraph at lines 207--209
+Underfull \hbox (badness 2582) in paragraph at lines 208--210
 \T1/lmr/m/n/10 im-ages by a padding method sim-i-lar to the one
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 207--209
+Underfull \hbox (badness 10000) in paragraph at lines 208--210
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 216--217
+Underfull \hbox (badness 10000) in paragraph at lines 217--218
 
  []
 
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 218.
+(hyperref)                than one, level fixed on input line 219.
 
 <images/visualize_pred/images/test_2.png, id=130, 610.28pt x 610.28pt>
 File: images/visualize_pred/images/test_2.png Graphic file (type png)
 <use images/visualize_pred/images/test_2.png>
 Package pdftex.def Info: images/visualize_pred/images/test_2.png  used on input
- line 223.
+ line 224.
 (pdftex.def)             Requested size: 119.50148pt x 119.50232pt.
 
-Overfull \hbox (18.32503pt too wide) in paragraph at lines 223--225
+Overfull \hbox (18.32503pt too wide) in paragraph at lines 224--226
 [][]
  []
 
@@ -913,10 +916,10 @@ Overfull \hbox (18.32503pt too wide) in paragraph at lines 223--225
 File: images/visualize_pred/groundtruth/pred_2.png Graphic file (type png)
 <use images/visualize_pred/groundtruth/pred_2.png>
 Package pdftex.def Info: images/visualize_pred/groundtruth/pred_2.png  used on 
-input line 228.
+input line 229.
 (pdftex.def)             Requested size: 119.50148pt x 119.49821pt.
 
-Overfull \hbox (18.32503pt too wide) in paragraph at lines 228--230
+Overfull \hbox (18.32503pt too wide) in paragraph at lines 229--231
 [][]
  []
 
@@ -924,10 +927,10 @@ Overfull \hbox (18.32503pt too wide) in paragraph at lines 228--230
 File: images/visualize_pred/images/test_9.png Graphic file (type png)
 <use images/visualize_pred/images/test_9.png>
 Package pdftex.def Info: images/visualize_pred/images/test_9.png  used on input
- line 238.
+ line 239.
 (pdftex.def)             Requested size: 119.50148pt x 119.50232pt.
 
-Overfull \hbox (18.32503pt too wide) in paragraph at lines 238--240
+Overfull \hbox (18.32503pt too wide) in paragraph at lines 239--241
 [][]
  []
 
@@ -936,72 +939,55 @@ Overfull \hbox (18.32503pt too wide) in paragraph at lines 238--240
 File: images/visualize_pred/groundtruth/pred_9.png Graphic file (type png)
 <use images/visualize_pred/groundtruth/pred_9.png>
 Package pdftex.def Info: images/visualize_pred/groundtruth/pred_9.png  used on 
-input line 243.
+input line 244.
 (pdftex.def)             Requested size: 119.50148pt x 119.49821pt.
 
-Overfull \hbox (18.32503pt too wide) in paragraph at lines 243--245
+Overfull \hbox (18.32503pt too wide) in paragraph at lines 244--246
 [][]
- []
-
-
-Underfull \hbox (badness 1400) in paragraph at lines 249--250
-\T1/lmr/m/n/10 back-ground. In Fig-ure 4 the net-work was able to
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 249--250
-
  []
 
 <images/visualize_pred/test_10.png, id=134, 610.28pt x 610.28pt>
 File: images/visualize_pred/test_10.png Graphic file (type png)
 <use images/visualize_pred/test_10.png>
 Package pdftex.def Info: images/visualize_pred/test_10.png  used on input line 
-255.
+254.
 (pdftex.def)             Requested size: 75.8804pt x 75.87508pt.
 <images/visualize_pred/pred_10.png, id=135, 439.4016pt x 439.4016pt>
 File: images/visualize_pred/pred_10.png Graphic file (type png)
 <use images/visualize_pred/pred_10.png>
 Package pdftex.def Info: images/visualize_pred/pred_10.png  used on input line 
-258.
+257.
 (pdftex.def)             Requested size: 75.8804pt x 75.8773pt.
 <images/visualize_pred/pred_patch_10.png, id=136, 439.4016pt x 439.4016pt>
 File: images/visualize_pred/pred_patch_10.png Graphic file (type png)
 <use images/visualize_pred/pred_patch_10.png>
 Package pdftex.def Info: images/visualize_pred/pred_patch_10.png  used on input
- line 261.
+ line 260.
 (pdftex.def)             Requested size: 75.8804pt x 75.8773pt.
+<images/test_10.png, id=137, 610.28pt x 610.28pt>
+File: images/test_10.png Graphic file (type png)
+<use images/test_10.png>
+Package pdftex.def Info: images/test_10.png  used on input line 273.
+(pdftex.def)             Requested size: 119.50148pt x 119.50232pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 267--268
+Overfull \hbox (18.32503pt too wide) in paragraph at lines 273--275
+[][]
+ []
 
+<images/pred_10_unet.png, id=138, 610.28pt x 610.28pt>
+File: images/pred_10_unet.png Graphic file (type png)
+<use images/pred_10_unet.png>
+Package pdftex.def Info: images/pred_10_unet.png  used on input line 278.
+(pdftex.def)             Requested size: 119.50148pt x 119.50232pt.
+
+Overfull \hbox (18.32503pt too wide) in paragraph at lines 278--280
+[][]
  []
 
 [3 <./images/visualize_pred/images/test_2.png> <./images/visualize_pred/groundt
 ruth/pred_2.png> <./images/visualize_pred/images/test_9.png> <./images/visualiz
-e_pred/groundtruth/pred_9.png> <./images/visualize_pred/test_10.png> <./images/
-visualize_pred/pred_10.png> <./images/visualize_pred/pred_patch_10.png>]
-<images/test_10.png, id=150, 610.28pt x 610.28pt>
-File: images/test_10.png Graphic file (type png)
-<use images/test_10.png>
-Package pdftex.def Info: images/test_10.png  used on input line 275.
-(pdftex.def)             Requested size: 119.50148pt x 119.50232pt.
-
-Overfull \hbox (18.32503pt too wide) in paragraph at lines 275--277
-[][]
- []
-
-<images/pred_10_unet.png, id=151, 610.28pt x 610.28pt>
-File: images/pred_10_unet.png Graphic file (type png)
-<use images/pred_10_unet.png>
-Package pdftex.def Info: images/pred_10_unet.png  used on input line 280.
-(pdftex.def)             Requested size: 119.50148pt x 119.50232pt.
-
-Overfull \hbox (18.32503pt too wide) in paragraph at lines 280--282
-[][]
- []
-
-
-Overfull \hbox (57.80475pt too wide) in paragraph at lines 291--301
+e_pred/groundtruth/pred_9.png>]
+Overfull \hbox (57.80475pt too wide) in paragraph at lines 288--298
  [][] 
  []
 
@@ -1017,28 +1003,27 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[4
-
- <./images/test_10.png> <./images/pred_10_unet.png (PNG copy)>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 325.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 325.
-
-(./reportRoadSegmentation.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 325.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 325.
+[4 <./images/visualize_pred/test_10.png> <./images/visualize_pred/pred_10.png> 
+<./images/visualize_pred/pred_patch_10.png> <./images/test_10.png> <./images/pr
+ed_10_unet.png (PNG copy)>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 323.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 323.
+ (./reportRoadSegmentation.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 323.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 323.
 Package rerunfilecheck Info: File `reportRoadSegmentation.out' has not changed.
 
 (rerunfilecheck)             Checksum: 9E40854DF6360420E688DC73DFCE86FF;1260.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 325.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 323.
  ) 
 Here is how much of TeX's memory you used:
  18236 strings out of 483089
  347723 string characters out of 5962869
- 580238 words of memory out of 5000000
+ 579238 words of memory out of 5000000
  32846 multiletter control sequences out of 15000+600000
  717151 words of font info for 117 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 60i,9n,60p,971b,429s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,9n,60p,1192b,429s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dv
 ips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}</usr/share
 /texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm
@@ -1048,7 +1033,7 @@ c10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></usr/share/texmf/fo
 nts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb
 ></usr/share/texmf/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1
 /public/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/lmri12.pfb>
-Output written on reportRoadSegmentation.pdf (4 pages, 6610583 bytes).
+Output written on reportRoadSegmentation.pdf (4 pages, 6611148 bytes).
 PDF statistics:
  210 PDF objects out of 1000 (max. 8388607)
  167 compressed objects within 2 object streams
