@@ -75,7 +75,7 @@ Our Convolutional Neural Net takes as input parts of the image of size 72x72, so
 \end{figure}
 \\
 This corresponds to the label 1 and hence will be white in the predicted label.  Otherwise it should be [1,0] and the patch in the label will be black. This is illustrated in Figure 1. 
-The idea behind this approach is, that the patch in the center is classified by taken into consideration the surrounding of this patch. Intuitively speaken, if we have a lot of vehicles near or in the patch, it is more likely that the patch belongs to road. Conversely, if there are buildings everywhere around the patch, the patch also belongs to background with high probability. Each patch hence is classified by its context in the image. 
+The idea behind this approach is, that the patch in the center is classified by taken into consideration the surrounding of this patch. Intuitively spoken, if we have a lot of vehicles near or in the patch, it is more likely that the patch belongs to road. Conversely, if there are buildings everywhere around the patch, the patch also belongs to background with high probability. Each patch hence is classified by its context in the image. 
 \subsection{Regression Task}
 The U-Net takes as input the whole 400x400 RGB image. It outputs the 400x400 binary image, which is supposed to segment correctly the roads from the background.
 \begin{figure}[htbp]
