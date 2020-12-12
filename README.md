@@ -9,6 +9,12 @@ This readme file contains useful information of the structure of the project con
 
 The detailed explanation of the project is on the report (`latex/report.pdf`).
 
+## **Description**
+
+This project was part of a challenge from EPFL course Machine Learning CS-433 and was hosted on the platform AIcrowd.
+There are a set of satellite/aerial images acquired from GoogleMaps and ground-truth images where each pixel is labeled as {road, background}. The objective is to train a classifier to segment roads in these images, i.e. assign a label {road=1, background=0} to each patch of pixel size 16x16.
+
+
 
 ## **Project structure**
 
@@ -34,10 +40,7 @@ In `src/` you can see:
 
   
 
-## **Description**
 
-This project was part of a challenge from EPFL course Machine Learning CS-433 and was hosted on the platform AIcrowd.
-There are a set of satellite/aerial images acquired from GoogleMaps and ground-truth images where each pixel is labeled as {road, background}. The objective is to train a classifier to segment roads in these images, i.e. assign a label {road=1, background=0} to each patch of pixel size 16x16.
 
 ## **Prerequisites**
 
