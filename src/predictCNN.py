@@ -25,7 +25,7 @@ def main():
     print('Loading Model...')
     # Run the normal CNN model
     model = CnnModel()
-    #model.built=True
+    model.built=True
     model.load_weights(PATH_WEIGHTS)
     # Generates the submission
     
