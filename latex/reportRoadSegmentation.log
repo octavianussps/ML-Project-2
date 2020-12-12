@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.6.4)  12 DEC 2020 19:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.6.4)  12 DEC 2020 19:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1006,15 +1006,15 @@ Before submitting the final camera ready copy, remember to:
 [4 <./images/visualize_pred/test_10.png> <./images/visualize_pred/pred_10.png> 
 <./images/visualize_pred/pred_patch_10.png> <./images/test_10.png> <./images/pr
 ed_10_unet.png (PNG copy)>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 323.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 323.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 324.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 324.
  (./reportRoadSegmentation.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 323.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 323.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 324.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 324.
 Package rerunfilecheck Info: File `reportRoadSegmentation.out' has not changed.
 
 (rerunfilecheck)             Checksum: 9E40854DF6360420E688DC73DFCE86FF;1260.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 323.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 324.
  ) 
 Here is how much of TeX's memory you used:
  18236 strings out of 483089
@@ -1033,10 +1033,10 @@ c10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></usr/share/texmf/fo
 nts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb
 ></usr/share/texmf/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1
 /public/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/lmri12.pfb>
-Output written on reportRoadSegmentation.pdf (4 pages, 6611148 bytes).
+Output written on reportRoadSegmentation.pdf (4 pages, 6611954 bytes).
 PDF statistics:
- 210 PDF objects out of 1000 (max. 8388607)
- 167 compressed objects within 2 object streams
+ 211 PDF objects out of 1000 (max. 8388607)
+ 168 compressed objects within 2 object streams
  38 named destinations out of 1000 (max. 500000)
  248 words of extra memory for PDF output out of 10000 (max. 10000000)
 
