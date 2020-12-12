@@ -26,7 +26,7 @@ We implement a Convolutional Neural Network using the sliding window Approach an
 | `out/`  | contains the final submission files, also csv format |
 | `src/`  | all the python scripts we used in this project, further explanation below |
 
-In `src/` you can see:
+### **In `src/` you can see:**
 
 + `run.py` is a script which produces the `final_UNET_submission.csv` file for the test data with the UNET model
 + `unetmodel_training.py` is a script to train the UNET using the training data 
@@ -38,12 +38,12 @@ In `src/` you can see:
 
 + `visualisation` is a folder containing some notebooks to help for the visualization
 
-In `models/` you can see:
+### **In `models/` you can see:**
 + `unetLReLU.h5` : the final U-NET model with Leaky ReLU
 + `weightsFinal.h5` : the final CNN model
 + `weightsSimpleNetworkBigPatch.h5` : the CNN model with less filters in each layers
   
-In `out/` you can see:
+### **In `out/` you can see:**
 + `final_UNET_submission.csv` : the final U-NET submission files with Leaky ReLU with F1-score of 0.898 and the accuracy of 0.947
 + `final_CNN_submission.csv` : the final CNN submission files with F1-score of 0.882 and the accuracy of 0.938
 + `final_small_CNN_submission.csv` : the CNN submission files with less filters in each layers with F1-score of 0.862 and the accuracy of 0.924
@@ -58,7 +58,7 @@ The code is tested with the following versions
 - `TensorFlow 2.0`
 - `Pillow 6.2.xx`
 
-### installation
+### **Installation**
 Now, install the necessary data science libraries. Make sure to install them in order listed below.
 
 ```
