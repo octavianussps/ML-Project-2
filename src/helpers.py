@@ -44,8 +44,7 @@ def load_data(data_path):
     """
     files = os.listdir(data_path)
     n = len(files)
-    imgs = [load_image(data_path + '/' + files[i]) for i in range(n)]
-    return np.asarray(imgs)
+    return np.asarray([load_image(data_path + '/' + files[i]) for i in range(n)])
 
 
 
@@ -71,7 +70,7 @@ def patch_to_label(patch):
 
 def img_crop(image, w, h, stride, padding):
     """
-    Crop an image into patches, taking into account mirror boundary conditions.
+    Crop an image into patches with taking into account mirror boundary conditions.
     
     input: 
     	image
@@ -112,7 +111,7 @@ def pad_image(data, padding):
     	data 
   
     """
-    if len(data.shape) < 3:  #we have a greyscale image (ground truth)
+    if len(data.shape) < 3:  #we have a groundtruth image
         data = np.lib.pad(data, ((padding, padding), (padding, padding)), 'reflect')
     else: # the image is an RGB image
         data = np.lib.pad(data, ((padding, padding), (padding, padding), (0, 0)), 'reflect')
@@ -238,6 +237,8 @@ def mask_to_submission_strings_for_smaller_patches(model, image_filename):
     input: 
     	model
         image_filename
+    output 
+        string
     """
    
     img_number = int(re.search(r"\d+", image_filename).group(0))
@@ -274,7 +275,7 @@ def mask_to_submission_strings_for_smaller_patches(model, image_filename):
 
 def predicted_BW(model, image_filename): 
     """
-    predicted black and white images
+    predicted black and white image
     input: 
     	model
         image_filename
