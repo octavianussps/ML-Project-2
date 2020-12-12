@@ -11,10 +11,11 @@ from tensorflow.keras.utils import to_categorical
 ######################################
 # PARAMETERS
 ######################################
-
-PIXEL_DEPTH = 255
-FOREGROUND_THRESHOLD = 0.25  # percentage of pixels > 1 required to assign a foreground label to a patch
 PATCH_SIZE=16
+FOREGROUND_THRESHOLD = 0.25  # percentage of pixels > 1 required to assign a foreground label to a patch
+PIXEL_DEPTH = 255
+
+
 
 ######################################
 # HELPERS FUNCTIONS

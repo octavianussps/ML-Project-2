@@ -1,7 +1,8 @@
 import tensorflow.keras as keras
 from tensorflow.keras import layers
-from helpers import *
 import matplotlib.pyplot as plt
+from helpers import *
+
 
 
 class CnnModel(keras.Model):
@@ -152,7 +153,7 @@ class CnnModel(keras.Model):
         Output:
            history = trained model
         """
-        def minibatch(self,x_train, y_train, nb_images):
+        def minibatch(self,y_train, x_train, nb_images):
             """
             Generates training data by cropping windows of the training images and computing their
             corresponding groundtruth window
@@ -207,7 +208,7 @@ class CnnModel(keras.Model):
        
         history = None
         try:
-            minibatch_generation = minibatch(self, x_train, y_train, nb_images)
+            minibatch_generation = minibatch(self, y_train, x_train, nb_images)
             history = self.model.fit_generator(minibatch_generation,
                                                steps_per_epoch=samples_per_epoch,
                                                epochs=nb_epochs,
