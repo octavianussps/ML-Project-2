@@ -148,8 +148,7 @@ def trainUNET(model, x_train, y_train, batch_size, num_epochs):
     model = unet model
     """
     try:
-        checkpoint = ModelCheckpoint("../models/unetLReLU.h5",monitor='loss',verbose =1,save_best_only = True,mode = 'auto',period = 5)
-        history = model.fit(x_train, y_train, batch_size=batch_size, epochs=num_epochs, callbacks=[checkpoint], validation_split=0.1)
+        history = model.fit(x_train, y_train, batch_size=batch_size, epochs=num_epochs, validation_split=0.1)
     except KeyboardInterrupt:
             pass
     print("model trained!")

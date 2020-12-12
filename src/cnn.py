@@ -54,7 +54,7 @@ class CnnModel(keras.Model):
     	    options = option
         """
         self.model.save_weights(filepath)
-        print("finish saving model...")
+       
 
     def predict(self,
                 x,
@@ -81,7 +81,7 @@ class CnnModel(keras.Model):
         Output:
         group_pathes = rebuilt predicted image
         """
-        print('Predicting images...')
+        
         #generate the patches for input
         X_patches = gen_patches(x, self.window_size,
                                 self.patch_size)
