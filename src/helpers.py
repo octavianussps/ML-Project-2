@@ -7,10 +7,18 @@ import re
 from PIL import Image
 from tensorflow.keras.utils import to_categorical
 
-#PARAMETERS
+
+######################################
+# PARAMETERS
+######################################
+
 PIXEL_DEPTH = 255
 FOREGROUND_THRESHOLD = 0.25  # percentage of pixels > 1 required to assign a foreground label to a patch
+PATCH_SIZE=16
 
+######################################
+# HELPERS FUNCTIONS
+######################################
 
 def load_image(filename):
     """    
@@ -24,7 +32,8 @@ def load_image(filename):
 
 
 def load_data(data_path):
-    """loading the data
+    """
+    loading the data
     
     input: 
     	data_path: path to the data
@@ -36,14 +45,13 @@ def load_data(data_path):
     files = os.listdir(data_path)
     n = len(files)
     imgs = [load_image(data_path + '/' + files[i]) for i in range(n)]
-
     return np.asarray(imgs)
 
 
 
 def patch_to_label(patch):
     """
-    Maps a BW white patch image to a label using thresholding
+    Maps a black and white patch image to a label using thresholding
     in different words : assign a label to a patch
     
     input: 
@@ -61,12 +69,12 @@ def patch_to_label(patch):
         return 0
 
 
-def img_crop(im, w, h, stride, padding):
+def img_crop(image, w, h, stride, padding):
     """
     Crop an image into patches, taking into account mirror boundary conditions.
     
     input: 
-    	im, image
+    	image
         w, 
         h, 
         stride,
@@ -76,20 +84,19 @@ def img_crop(im, w, h, stride, padding):
     	list_patches 
   
     """
+    # initialization
+    assert len(image.shape) == 3, 'Expected RGB image.'
     
-    assert len(im.shape) == 3, 'Expected RGB image.'
     list_patches = []
-    imgwidth = im.shape[0]
     
-    imgheight = im.shape[1]
+    image_width = image.shape[0]
+    image_height = image.shape[1]
     
-    im = np.lib.pad(im, ((padding, padding), (padding, padding), (0, 0)), 'reflect')
+    image = np.lib.pad(image, ((padding, padding), (padding, padding), (0, 0)), 'reflect')
     
-    for i in range(padding, imgheight + padding, stride):
-        for j in range(padding, imgwidth + padding, stride):
-            im_patch = im[j - padding:j + w + padding, i - padding:i + h + padding, :]
-            list_patches.append(im_patch)
-    
+    for i in range(padding, image_height + padding, stride):
+        for j in range(padding, image_width + padding, stride):
+            list_patches.append(image[j - padding:j + w + padding, i - padding:i + h + padding, :])
     return list_patches
 
 
@@ -124,22 +131,21 @@ def pad_images(images, padding_size):
     	extention of the canva of images
   
     """
-    nb_images = images.shape[0]
-    return np.asarray([pad_image(images[i], padding_size) for i in range(nb_images)])
+    return np.asarray([pad_image(images[i], padding_size) for i in range(images.shape[0])])
 
 
-def img_float_to_uint8(img):
+def img_float_to_uint8(image):
     """
     change the image codded in float to an image coded in uint8
     
     input: 
-    	im: image
+    	 image
     
     output:
-    	r_ing
+    	r_image
     """
-    r_img = img - np.min(img)
-    return (r_img / np.max(r_img) * PIXEL_DEPTH).round().astype(np.uint8)
+    r_image = image - np.min(image)
+    return (r_image / np.max(r_image) * PIXEL_DEPTH).round().astype(np.uint8)
 
 
 def load_images(train_data_filename, train_labels_filename, num_images):
@@ -153,15 +159,13 @@ def load_images(train_data_filename, train_labels_filename, num_images):
     
     output:
     	images : images
-        gt_images
+        groundtruth_images
     """
     print("loading all images from the disk ...  ")
     images = np.asarray([load_image(train_data_filename + "satImage_%.3d" % i + ".png") for i in range(1, num_images + 1)])
-    gt_images = np.asarray([load_image(train_labels_filename + "satImage_%.3d" % i + ".png") for i in range(1, num_images + 1)])
+    groundtruth_images = np.asarray([load_image(train_labels_filename + "satImage_%.3d" % i + ".png") for i in range(1, num_images + 1)])
     print("finished loading all images from the disk ...")
-    print("images shape : ", end=' ')
-    print(images.shape)
-    return images, gt_images
+    return images, groundtruth_images
 
 
 def group_patches(patches, num_images):
@@ -174,42 +178,6 @@ def group_patches(patches, num_images):
     	list_windows
     """
     return patches.reshape(num_images, -1)
-
-def image_crop_for_reg(im, window_size):
-    """
-    Crop an image into patches, taking into account mirror boundary conditions.
-    input: 
-    	patches: diction to the train set 
-        num_images : nb images
-    
-    output:
-    	list_of_windows
-    """
-    assert len(im.shape) == 3, 'Expected RGB image.'
-    list_of_windows = []
-    imagewidth = im.shape[0]
-    imageheight = im.shape[1]
-    
-    for i in range(0, imageheight, window_size):
-        for j in range(0, imagewidth, window_size):
-            im_patch = im[j:j + window_size, i:i + window_size, :]
-            list_of_windows.append(im_patch)
-    
-    return list_of_windows
-
-def generation_windows_for_reg(images, window_size):
-    """
-    generation of windows for regretion
-    input: 
-    	images
-        window_size
-    
-    output:
-    	windows
-    """                
-    windows = np.asarray([image_crop_for_reg(images[i],window_size) for i in range(images.shape[0])])                    
-                        
-    return windows.reshape(-1, windows.shape[2], windows.shape[3], windows.shape[4])
 
 
 
@@ -231,28 +199,12 @@ def gen_patches(images, window_size, patch_size):
         [img_crop(images[i], patch_size, patch_size, patch_size, padding_size) for i in range(images.shape[0])])
 
     return patches.reshape(-1, patches.shape[2], patches.shape[3], patches.shape[4])
-
-def generate_submission(model, submission_path, modelType, *image_filenames):
-    """
-    Generate a .csv containing the classification of the test set
-    input: 
-    	model
-        submission_path
-        modelType
-        image_filenames
     
-    output:
-    	classification of the test set
-    """ 
-    with open(submission_path, 'w') as f:
-        f.write('id,prediction\n')
-        for fn in image_filenames[0:]:
-            if modelType == 1:
-                f.writelines('{}\n'.format(s) for s in mask_to_submission_strings_unet(fn))
-            elif modelType == 2:
-                f.writelines('{}\n'.format(s) for s in mask_to_submission_strings(model, fn))
-            else:
-                f.writelines('{}\n'.format(s) for s in mask_to_submission_strings_for_smaller_patches(model, fn))
+
+
+######################################
+# CNN MODELS
+######################################
 
 def mask_to_submission_strings(model, image_filename):
     """
@@ -260,6 +212,7 @@ def mask_to_submission_strings(model, image_filename):
     input: 
     	model
         image_filename
+    output string
     """
         
     img_number = int(re.search(r"\d+", image_filename).group(0))
@@ -293,15 +246,15 @@ def mask_to_submission_strings_for_smaller_patches(model, image_filename):
   
     labels = model.predict(image).reshape(-1) #we predict the labels
 
-    patch_size=16
+    
     count = 0
     i_count = 0
     
     print("Processing the image : " + image_filename)
 
-    for j in range(0,image.shape[2], patch_size):
+    for j in range(0,image.shape[2], PATCH_SIZE):
         i_count += 456
-        for i in range(0,image.shape[1], patch_size):  
+        for i in range(0,image.shape[1], PATCH_SIZE):  
 
             first_row = int(labels[i_count-456]+labels[i_count+1-456]+labels[i_count+2-456]+labels[i_count+3-456])
             second_row = int(labels[i_count-456+152]+labels[i_count-456+153]+labels[i_count-456+154]+labels[i_count-456+155])
@@ -311,7 +264,7 @@ def mask_to_submission_strings_for_smaller_patches(model, image_filename):
             i_count = i_count + 4
             
             
-            mean = (first_row+second_row+third_row+fourth_row) / patch_size
+            mean = (first_row+second_row+third_row+fourth_row) / PATCH_SIZE
             if mean > 0.25:
                 label = 1
             else:
@@ -321,7 +274,7 @@ def mask_to_submission_strings_for_smaller_patches(model, image_filename):
 
 def predicted_BW(model, image_filename): 
     """
-    predicted BW
+    predicted black and white images
     input: 
     	model
         image_filename
@@ -333,46 +286,31 @@ def predicted_BW(model, image_filename):
     image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
     
     return  model.predict(image).reshape(-1)#we predict the labels
+
+######################################
+# UNET MODEL
+######################################
     
+def image_prediction_unet(image, model):
+    """
+    image_prediction_unet
+    input: 
+    	model
+        image
     
-    
-    
-def mask_to_submission_strings_unet(image_filename):
-    """Reads a predicted image (BW) and outputs the strings that should go into the submission file"""
-    img_number = int(re.search(r"\d+", image_filename).group(0))
-    im = mpimg.imread(image_filename)
-    patch_size = 16
-    for j in range(0, im.shape[1], patch_size):
-        for i in range(0, im.shape[0], patch_size):
-            patch = im[i: i + patch_size, j: j + patch_size]
-            label = patch_to_label(patch)
-            yield "{:03d}_{}_{},{}".format(img_number, j, i, label)
+    output predition with unet
+    """
 
+    width = image.shape[0]
+    height = image.shape[1]
 
-def gen_image_predictions_unet(model, prediction_path, *image_filenames):
-    """Predicts labels and export them as BW images"""
-    for idx, path in enumerate(image_filenames):
-        img = np.squeeze(load_image(path))
-        prediction = img_predict_unet(img, model)
-        prediction = np.squeeze(prediction).round()
-        prediction = img_float_to_uint8(prediction)
-        prediction_name = prediction_path + 'pred_' + str(idx + 1) + '_unet.png'
-        Image.fromarray(prediction).save(prediction_name)
+    image1 = image[:400, :400]
+    image2 = image[:400, -400:]
+    image3 = image[-400:, :400]
+    image4 = image[-400:, -400:]
 
-
-def img_predict_unet(img, model):
-    width = img.shape[0]
-    height = img.shape[1]
-
-    img1 = img[:400, :400]
-    img2 = img[:400, -400:]
-    img3 = img[-400:, :400]
-    img4 = img[-400:, -400:]
-
-    imgs = np.array([img1, img2, img3, img4])
-    predictions = model.predict(imgs)
-
-    prediction = np.zeros((width, height, 1))
+    predictions = model.predict(np.array([image1, image2, image3, image4]))
+    prediction = np.zeros((width, height, 1)) # initialisation
 
     prediction[:400, :400] = predictions[0]
     prediction[:400, -400:] = predictions[1]
@@ -380,4 +318,68 @@ def img_predict_unet(img, model):
     prediction[-400:, -400:] = predictions[3]
 
     return prediction
+    
+    
+def mask_to_submission_strings_unet(image_filename):
+    """
+    Reads a predicted black and white image and outputs the strings that should go into the submission file
+    input: 
+        image_filename
+    
+    output string
+    """
+   
+    image_number = int(re.search(r"\d+", image_filename).group(0))
+    image = mpimg.imread(image_filename)
+    
+    for j in range (0, image.shape[1], PATCH_SIZE):
+        for i in range (0, image.shape[0], PATCH_SIZE):
+            label = patch_to_label(image[i: i + PATCH_SIZE, j: j + PATCH_SIZE])
+            yield "{:03d}_{}_{},{}".format(image_number, j, i, label)
 
+
+def gen_image_predictions_unet(model, prediction_path, *image_filenames):
+    """
+    Predicts labels and export them as black and white images
+    inputs: 
+       model
+        submission_path
+        modelType
+        image_filenames
+    
+    output black and white images
+    """
+    for index, path in enumerate(image_filenames):
+        image = np.squeeze(load_image(path))
+        prediction = image_prediction_unet(image, model)
+        prediction = img_float_to_uint8( np.squeeze(prediction).round())
+        prediction_name = prediction_path + 'pred_' + str(index + 1) + '_unet.png'
+        Image.fromarray(prediction).save(prediction_name)
+
+
+
+######################################
+# BOTH MODELS
+######################################
+
+def generate_submission(model, submission_path, modelType, *image_filenames):
+    """
+    Generate a .csv containing the classification of the test set
+    input: 
+    	model
+        submission_path
+        modelType
+        image_filenames
+    
+    output:
+    	classification of the test set
+    """ 
+    with open(submission_path, 'w') as f:
+        f.write('id,prediction\n')
+        for fn in image_filenames[0:]:
+            if modelType == 1:
+                f.writelines('{}\n'.format(s) for s in mask_to_submission_strings_unet(fn))
+            elif modelType == 2:
+                f.writelines('{}\n'.format(s) for s in mask_to_submission_strings(model, fn))
+            else:
+                f.writelines('{}\n'.format(s) for s in mask_to_submission_strings_for_smaller_patches(model, fn))
