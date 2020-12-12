@@ -15,8 +15,6 @@ TEST_SIZE = 50
 
 
 
-
-
 def main():
 
         image_filenames_test = [PATH_TEST_DATA + 'test_' + str(i + 1) + '/' + 'test_' + str(i + 1) + '.png' for i
@@ -32,8 +30,6 @@ def main():
         # Generates the submission
         generate_submission(model_unet, PATH_SUBMISSION, 1, *image_filenames_predict)
         print("csv file generated!")
-
-
 
 
 if __name__ == '__main__':
