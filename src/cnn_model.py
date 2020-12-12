@@ -7,12 +7,26 @@ import matplotlib.pyplot as plt
 class CnnModel(keras.Model):
 
     def __init__(self):
+    	"""
+    	Define the parameters of class CNN Models
+    	Variables:
+    	  batch_size = batch size 
+    	  patch_size = patch size
+    	  windows_size = window size for context of the patch
+    	  channels = channel size w.r.t color image mode
+    	  nb_classes = black and whita labelling
+    	  alpha = parameter for leaky relu
+    	  dropout_prob = probability for dropout
+    	  regularization_value = value for regularization
+    	  pool = polling dimension
+    	  stride = stride dimension
+    	"""
         super(CnnModel, self).__init__()
         keras.backend.set_image_data_format('channels_last')
         self.batch_size = 256
         self.patch_size = 16
-        self.window_size = 72  # size of the window acting as context for the patch
-        self.channels = 3  # color images in RGB mode
+        self.window_size = 72 
+        self.channels = 3 
         self.nb_classes = 2  # black and white labeling
         self.alpha = 0.1  # leaky relu parameter
         self.dropout_prob = 0.25  # random dropout parameter
@@ -22,7 +36,12 @@ class CnnModel(keras.Model):
         self.create_model()
 
     def create_model(self):
-        """Creates and compile the CNN model """
+        """Define the layer for CNN Model architecture composed of convulation layers, dense layer and apply activation function, optimizer, and loss
+           Variables: 
+              model = the model of the layer
+              input shape = shape of input of layer w.r.t input image
+              optimizer = the optimizer used for the training
+        """
         self.model = keras.Sequential()
 
         # Input layer
@@ -46,7 +65,7 @@ class CnnModel(keras.Model):
         self.model.add(layers.LeakyReLU(alpha=self.alpha))
         self.model.add(layers.MaxPool2D(pool_size = self.pool, padding='same'))
         self.model.add(layers.Dropout(self.dropout_prob))
-        self.model.add(layers.Flatten())
+        self.model.add(layers.Flatten()) # flatten all the layer into one 
 
         # Fourth fully connected layer : 128 node
         self.model.add(layers.Dense(128, kernel_regularizer=keras.regularizers.l2(self.regularization_value)))
@@ -68,9 +87,18 @@ class CnnModel(keras.Model):
         self.model.summary()
 
     def train_model(self, gt_imgs, tr_imgs, nb_epochs=100):
-        """Trains the CNN model """
+        """
+        Train the CNN model
+        Inputs:
+           gt_imgs = ground truth images
+           tr_imgs = training images
+           nb_epoch = number of epoch for training
+        
+        Output:
+           history = trained model
+        """
 
-        np.random.seed(1234)  
+        np.random.seed(1234)  # for simulation, to set same number random value.
         nb_images = tr_imgs.shape[0]
 
         padding_size = (self.window_size - self.patch_size) // 2
@@ -81,7 +109,7 @@ class CnnModel(keras.Model):
         #print("gtimgshape",gt_imgs.shape)
         def generate_minibatch():
             """
-            Procedure for real-time minibatch creation, preparing cropping random windows and corresponding patches
+            Procedure to generate real-time minibatch , preparing cropping random windows and corresponding patches
             This runs in a parallel thread while the model is being trained.
             """
             while True:
@@ -100,36 +128,31 @@ class CnnModel(keras.Model):
                     # Sample a random window from the image, center is the pixel in the center
                     center = np.random.randint(self.window_size // 2, shape[0] - self.window_size // 2, 2)
                     
-                    # x range = center +- half window
+                    # x range = center +/- half window
                     # y range analogously
                     window = tr_img[center[0] - self.window_size // 2:center[0] + self.window_size // 2,
                              center[1] - self.window_size // 2:center[1] + self.window_size // 2]
                     
-                    # Find the corresponding ground truth patch (patch not window!!)
-                    # hence 16x16 pixel block
+                    # Find the corresponding ground truth patch: 16x16 pixels
                     gt_patch = gt_img[center[0] - self.patch_size // 2:center[0] + self.patch_size // 2,
                                center[1] - self.patch_size // 2:center[1] + self.patch_size // 2]
-                    
-                    #print("windowsize",gt_patch.shape)
-
+                   
                     # x_batch is the input
                     x_batch[i] = window
-                    # we convert our groundtruth images into our new groundtruth, since we transformed our problem
-                    # into a classification problem
-                    #print("gtbacth", patch_to_label(gt_patch))
+                    # convert groundtruth images into new groundtruth, since we transformed our problem into classification case
                     
                     y_batch[i] = to_categorical(patch_to_label(gt_patch), self.nb_classes)
-                    #print("label",y_batch[i])
+                    
                 yield x_batch, y_batch
 
         # Number of windows fed to the model per epoch
         samples_per_epoch = tr_imgs.shape[0] * tr_imgs.shape[1] * tr_imgs.shape[2] // (
                 self.patch_size ** 2 * self.batch_size)
-        #samples_per_epoch = 2
+
         print("samples per epoch %d" % samples_per_epoch)
 
-        # This callback reduces the learning rate when the training accuracy does not improve any more
-        lr_callback = keras.callbacks.ReduceLROnPlateau(monitor='loss', factor=0.5, patience=2,
+        #callback: reduces the learning rate when the training accuracy does not improve any more
+        start_callback = keras.callbacks.ReduceLROnPlateau(monitor='loss', factor=0.5, patience=2,
                                                         verbose=1, mode='auto', epsilon=0.0001, cooldown=0, min_lr=0)
 
         # Stops the training process upon convergence
@@ -141,14 +164,16 @@ class CnnModel(keras.Model):
                                                steps_per_epoch=samples_per_epoch,
                                                epochs=nb_epochs,
                                                verbose=1,
-                                               callbacks=[lr_callback, stop_callback], workers=1)
+                                               callbacks=[start_callback, stop_callback], workers=1)
         except KeyboardInterrupt:
-            # Do not throw away the model in case the user stops the training process
             pass
 
         print('Training completed')
         return history
 
+    """
+    Save the trained model's weight 
+    """
     def save(self,
              filepath,
              overwrite=True,
@@ -157,7 +182,7 @@ class CnnModel(keras.Model):
              signatures=None,
              options=None):
         self.model.save_weights(filepath)
-        print("model saved !")
+        print("finish saving model.")
 
     def predict(self,
                 x,
@@ -169,11 +194,17 @@ class CnnModel(keras.Model):
                 workers=1,
                 use_multiprocessing=False):
         print('Predicting images..')
+    """
+    Predict the images
+    Inputs:
+    	x = input image
+    
+    Output:
+       group_pathes = rebuilt predicted image
+    """
+        #generate the patches for input
         X_patches = gen_patches(x, self.window_size,
                                 self.patch_size)
-        #print("after gen patches",X_patches.shape)
-        #print("patches",X_patches.shape)
         Y_pred = self.model.predict(X_patches)
-        #print("y_pred",Y_pred.shape)
         Y_pred = (Y_pred[:, 0] < Y_pred[:, 1]) * 1
         return group_patches(Y_pred, x.shape[0])
