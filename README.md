@@ -83,7 +83,7 @@ Download it and put it in the folder named `data/`.
 
 
 ## **Running**
-In order to submit the predictions we give on the test data, you have to run the `run.py` file. It will run the unet model. It will load the unet model with the trained weights already build in `cnnmodel_training.py` . Then the model will predict on the test data and the `out/submission.csv` file will be generated.
+In order to submit the predictions we give on the test data, you have to run the `run.py` file. It will run the unet model. It will load the unet model with the trained weights already build in `unetmodel_training.py` . Then the model will predict on the test data and the `out/final_UNET_submission.csv` file will be generated.
 
 
 ## **Results**
