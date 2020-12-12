@@ -33,7 +33,7 @@ We implement a Convolutional Neural Network using the sliding window Approach an
 + `unetmodel.py` contains several functions to build the unet model 
 + `predictCNN.py` is a script which produces the `final_CNN_submission.csv` file for the test data with the CNN model
 + `cnnmodel_training.py` is a script to train the cnn using the training data 
-+ `cnn_model.py` contains several functions to build the cnn model
++ `cnn.py` contains several functions to build the cnn model
 + `helpers.py` contains several helper functions in order to run the cnn 
 
 + `visualisation` is a folder containing some notebooks to help for the visualization

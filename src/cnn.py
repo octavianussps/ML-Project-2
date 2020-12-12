@@ -35,6 +35,59 @@ class CnnModel(keras.Model):
     	self.stride = (1,1)
     	self.create_model()
 
+    def save(self,
+             filepath,
+             overwrite=True,
+             include_optimizer=True,
+             save_format=None,
+             signatures=None,
+             options=None):
+        """
+        Save the trained model's weight 
+        Inputs:
+    	    filepath = path to save the weight
+    	    overwrite = boolean operation, overwrite the best weight
+    	    include_optimizer = boolean operation, utilize the optimizer
+    	    save_format = specific format to save
+    	    signatures = signature of the model
+    	    options = option
+        """
+        self.model.save_weights(filepath)
+        print("finish saving model...")
+
+    def predict(self,
+                x,
+                batch_size=None,
+                verbose=0,
+                steps=None,
+                callbacks=None,
+                max_queue_size=10,
+                workers=1,
+                use_multiprocessing=False):
+        
+        """
+        Predict the images
+        Inputs:
+            x = input image
+            batch_size = batch size
+            verbose = verbose
+            steps = step
+            callback = callback
+            max_queue_size = maximum queue size
+            workers = workers
+            use_multiprocessing = boolean operation, utilize multiprocessing
+    
+        Output:
+        group_pathes = rebuilt predicted image
+        """
+        print('Predicting images...')
+        #generate the patches for input
+        X_patches = gen_patches(x, self.window_size,
+                                self.patch_size)
+        Y_pred = self.model.predict(X_patches)
+        Y_pred = (Y_pred[:, 0] < Y_pred[:, 1]) * 1
+        return group_patches(Y_pred, x.shape[0])
+
     def create_model(self):
         """Define the layer for CNN Model architecture composed of convulation layers, dense layer and apply activation function, optimizer, and loss
            Inputs: 
@@ -88,48 +141,7 @@ class CnnModel(keras.Model):
         self.model.summary()
 
 
-    def generate_minibatch(self,x_train, y_train, nb_images):
-        """
-        Generates training data by cropping windows of the training images and computing their
-        corresponding groundtruth window
-        inputs : 
-            x_train = training images
-            y_train = groundtruth images
-            nb_images
-        """
-        while True:
-            # Generate one minibatch
-            x_batch = np.empty((self.batch_size, self.window_size, self.window_size, 3))
-            y_batch = np.empty((self.batch_size, 2))
-
-            for i in range(self.batch_size):
-                
-                index = np.random.choice(nb_images)
-                x_img = x_train[index]
-                y_img = y_train[index]
-                shape = x_img.shape
-
-                # Sample a random window from the image, center is the pixel in the center
-                center = np.random.randint(self.window_size // 2, shape[0] - self.window_size // 2, 2)
-                
-                # x range = center +/- half window
-                # y range analogously
-                window = x_img[center[0] - self.window_size // 2:center[0] + self.window_size // 2,
-                        center[1] - self.window_size // 2:center[1] + self.window_size // 2]
-                
-                # Find the corresponding ground truth patch: 16x16 pixels
-                groundtruth_patch = y_img[center[0] - self.patch_size // 2:center[0] + self.patch_size // 2,
-                        center[1] - self.patch_size // 2:center[1] + self.patch_size // 2]
-            
-                # x_batch is the input
-                x_batch[i] = window
-
-                # convert groundtruth images into new groundtruth, since we transformed our problem into classification case
-                y_batch[i] = to_categorical(patch_to_label(groundtruth_patch), self.nb_classes)
-                
-            yield x_batch, y_batch
-
-    def train_model(self, x_train, y_train, nb_epochs=100):
+    def train_CNN_model(self, x_train, y_train, nb_epochs=100):
         """
         Train the CNN model
         Inputs:
@@ -140,90 +152,71 @@ class CnnModel(keras.Model):
         Output:
            history = trained model
         """
+        def minibatch(self,x_train, y_train, nb_images):
+            """
+            Generates training data by cropping windows of the training images and computing their
+            corresponding groundtruth window
+            inputs : 
+                x_train = training images
+                y_train = groundtruth images
+                nb_images
+            """
+            while True:
+                # Generate one minibatch
+                x_batch = np.empty((self.batch_size, self.window_size, self.window_size, 3))
+                y_batch = np.empty((self.batch_size, 2))
+
+                for i in range(self.batch_size):
+                    
+                    index = np.random.choice(nb_images)
+                    x_image = x_train[index]
+                    y_image = y_train[index]
+                    shape = x_image.shape
+
+                    # Sample a random window from the image, center is the pixel in the center
+                    center = np.random.randint(self.window_size // 2, shape[0] - self.window_size // 2, 2)
+                    
+                    # x range = center +/- half window
+                    # y range analogously
+                    window = x_image[center[0] - self.window_size // 2:center[0] + self.window_size // 2,
+                            center[1] - self.window_size // 2:center[1] + self.window_size // 2]
+                    
+                    # Find the corresponding ground truth patch: 16x16 pixels
+                    groundtruth_patch = y_image[center[0] - self.patch_size // 2:center[0] + self.patch_size // 2,
+                            center[1] - self.patch_size // 2:center[1] + self.patch_size // 2]
+                
+                    # x_batch is the input
+                    x_batch[i] = window
+
+                    # convert groundtruth images into new groundtruth, since we transformed our problem into classification case
+                    y_batch[i] = to_categorical(patch_to_label(groundtruth_patch), self.nb_classes)
+                    
+                yield x_batch, y_batch
 
         np.random.seed(1234)  # for simulation, to set same number random value.
         nb_images = x_train.shape[0]
 
         padding_size = (self.window_size - self.patch_size) // 2
         
-        # pad images to b aple to apply sliding window approach to pixels clos to the border!
+        # pad images to be able to apply sliding window approach to pixels clos to the border!
         x_train, y_train = pad_images(x_train, padding_size), pad_images(y_train, padding_size)
 
         # Number of windows fed to the model per epoch
         samples_per_epoch = x_train.shape[0] * x_train.shape[1] * x_train.shape[2] // (
                 self.patch_size ** 2 * self.batch_size)
-
-        print("samples per epoch %d" % samples_per_epoch)
-
-        #callback: reduces the learning rate when the training accuracy does not improve any more
-        start_callback = keras.callbacks.ReduceLROnPlateau(monitor='loss', factor=0.5, patience=2,
-                                                        verbose=1, mode='auto', epsilon=0.0001, cooldown=0, min_lr=0)
-
-        # Stops the training process upon convergence
-        stop_callback = keras.callbacks.EarlyStopping(monitor='loss', min_delta=0.0001, patience=2, verbose=1,
-                                                      mode='auto')
+       
         history = None
         try:
-            history = self.model.fit_generator(generate_minibatch(x_train, y_train, nb_images),
+            minibatch_generation = minibatch(self, x_train, y_train, nb_images)
+            history = self.model.fit_generator(minibatch_generation,
                                                steps_per_epoch=samples_per_epoch,
                                                epochs=nb_epochs,
                                                verbose=1,
-                                               callbacks=[start_callback, stop_callback], workers=1)
+                                               workers=1)
         except KeyboardInterrupt:
             pass
 
-        print('Training completed')
+        print('Trained')
         return history
 
-    def save(self,
-             filepath,
-             overwrite=True,
-             include_optimizer=True,
-             save_format=None,
-             signatures=None,
-             options=None):
-        """
-        Save the trained model's weight 
-        Inputs:
-    	    filepath = path to save the weight
-    	    overwrite = boolean operation, overwrite the best weight
-    	    include_optimizer = boolean operation, utilize the optimizer
-    	    save_format = specific format to save
-    	    signatures = signature of the model
-    	    options = option
-        """
-        self.model.save_weights(filepath)
-        print("finish saving model...")
-
-    def predict(self,
-                x,
-                batch_size=None,
-                verbose=0,
-                steps=None,
-                callbacks=None,
-                max_queue_size=10,
-                workers=1,
-                use_multiprocessing=False):
-        
-        """
-        Predict the images
-        Inputs:
-            x = input image
-            batch_size = batch size
-            verbose = verbose
-            steps = step
-            callback = callback
-            max_queue_size = maximum queue size
-            workers = workers
-            use_multiprocessing = boolean operation, utilize multiprocessing
     
-        Output:
-        group_pathes = rebuilt predicted image
-        """
-        print('Predicting images...')
-        #generate the patches for input
-        X_patches = gen_patches(x, self.window_size,
-                                self.patch_size)
-        Y_pred = self.model.predict(X_patches)
-        Y_pred = (Y_pred[:, 0] < Y_pred[:, 1]) * 1
-        return group_patches(Y_pred, x.shape[0])

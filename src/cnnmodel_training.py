@@ -1,5 +1,5 @@
 from helpers import *
-from cnn_model import CnnModel
+from cnn import CnnModel
 #from utils.metrics import f1_scores
 
 data_dir = '../data/training/'
@@ -23,7 +23,7 @@ def main():
     tr_imgs, gt_imgs = load_images(train_data_filename, train_labels_filename, num_images)
 
     # Train the model
-    history = cnn.train_model(gt_imgs, tr_imgs, nb_epochs)
+    history = cnn.train_CNN_model(gt_imgs, tr_imgs, nb_epochs)
     
     # Save the weights
     cnn.save_weights(PATH_WEIGHTS)

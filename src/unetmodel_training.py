@@ -1,14 +1,14 @@
 import os
 import matplotlib.pyplot as plt
-from unetmodel import *
+from unet import *
 from helpers import *
 
-
+######################################
+# PARAMETERS
+######################################
 TRAIN_DATA = "../data/training/"
 MODEL_PATH = "../models/unetBestWeights.h5"
 MODEL_PATH_LRELU = '../models/unetLReLU.h5'
-
-
 
 BATCH = 16
 EPOCHS = 500
@@ -41,7 +41,7 @@ def main():
 
     
     # train the model
-    unet = train(unet, imgs, gt_imgs, BATCH, EPOCHS)
+    unet = trainUNET(unet, imgs, gt_imgs, BATCH, EPOCHS)
     # save the weights
     unet.save(MODEL_PATH_LRELU)
     
