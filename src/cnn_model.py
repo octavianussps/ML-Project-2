@@ -37,7 +37,7 @@ class CnnModel(keras.Model):
 
     def create_model(self):
         """Define the layer for CNN Model architecture composed of convulation layers, dense layer and apply activation function, optimizer, and loss
-           Variables: 
+           Inputs: 
               model = the model of the layer
               input shape = shape of input of layer w.r.t input image
               optimizer = the optimizer used for the training
@@ -178,18 +178,18 @@ class CnnModel(keras.Model):
              save_format=None,
              signatures=None,
              options=None):
-    """
-    Save the trained model's weight 
-    Inputs:
-    	filepath = path to save the weight
-    	overwrite = boolean operation, overwrite the best weight
-    	include_optimizer = boolean operation, utilize the optimizer
-    	save_format = specific format to save
-    	signatures = signature of the model
-    	options = option
-    """
+        """
+        Save the trained model's weight 
+        Inputs:
+    	    filepath = path to save the weight
+    	    overwrite = boolean operation, overwrite the best weight
+    	    include_optimizer = boolean operation, utilize the optimizer
+    	    save_format = specific format to save
+    	    signatures = signature of the model
+    	    options = option
+        """
         self.model.save_weights(filepath)
-        print("finish saving model.")
+        print("finish saving model...")
 
     def predict(self,
                 x,
@@ -200,22 +200,23 @@ class CnnModel(keras.Model):
                 max_queue_size=10,
                 workers=1,
                 use_multiprocessing=False):
-        print('Predicting images..')
-    """
-    Predict the images
-    Inputs:
-    	x = input image
-    	batch_size = batch size
-    	verbose = verbose
-    	steps = step
-    	callback = callback
-    	max_queue_size = maximum queue size
-    	workers = workers
-    	use_multiprocessing = boolean operation, utilize multiprocessing
+        
+        """
+        Predict the images
+        Inputs:
+            x = input image
+            batch_size = batch size
+            verbose = verbose
+            steps = step
+            callback = callback
+            max_queue_size = maximum queue size
+            workers = workers
+            use_multiprocessing = boolean operation, utilize multiprocessing
     
-    Output:
-       group_pathes = rebuilt predicted image
-    """
+        Output:
+        group_pathes = rebuilt predicted image
+        """
+        print('Predicting images...')
         #generate the patches for input
         X_patches = gen_patches(x, self.window_size,
                                 self.patch_size)

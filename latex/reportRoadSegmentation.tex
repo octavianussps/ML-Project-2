@@ -68,7 +68,7 @@ Image segmentation is a well known task in the field of Deep Learning which can 
 Our Convolutional Neural Net takes as input parts of the image of size 72x72, so called windows, and classifies if the 16x16 patch in the center of this window belongs to "road" or not. If the net classifies the patch as road, the output should be [0,1].
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=6cm]{images/classificationTask.png}
+	\includegraphics[width=8cm]{images/classificationTask.png}
 	\caption{Our CNN classifies if the patch in the center of the window belongs to road or to background.}
 	\vspace{-3mm}
 	\label{fig:clas}
@@ -77,7 +77,14 @@ Our Convolutional Neural Net takes as input parts of the image of size 72x72, so
 This corresponds to the label 1 and hence will be white in the predicted label.  Otherwise it should be [1,0] and the patch in the label will be black. This is illustrated in Figure 1. 
 The idea behind this approach is, that the patch in the center is classified by taken into consideration the surrounding of this patch. Intuitively speaken, if we have a lot of vehicles near or in the patch, it is more likely that the patch belongs to road. Conversely, if there are buildings everywhere around the patch, the patch also belongs to background with high probability. Each patch hence is classified by its context in the image. 
 \subsection{Regression Task}
-
+The U-Net takes as input the whole 400x400 RGB image. It outputs the 400x400 binary image, which is supposed to segment correctly the roads from the background.
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=8cm]{images/regressionTask.png}
+	\caption{The U-Net .}
+	\vspace{-3mm}
+	\label{fig:regr}
+\end{figure}
 \subsection{Data Augmentation}
 
 The training data consists of 100 RGB satellite images of size 400x400 and their groundtruths, 400x400 binary images respectively. 
@@ -206,9 +213,9 @@ In order to feed in the test images into the U-Net we crop each test image into 
 \vspace{0.5cm}
 \section{Results}
 \vspace{0.3cm}
-For every test image we obtain a prediction, which segments roads from background.
+For every test image we obtain a prediction, which segments roads from background.\\
 \subsubsection{Convolutional Neural Network}
-Two test images and their predictions obtained by CNN are displayed below.
+Two test images and their predictions obtained by CNN are displayed in Figure 6 and 7.
 
 \begin{figure}[htbp]
 	\centering
@@ -239,7 +246,7 @@ Two test images and their predictions obtained by CNN are displayed below.
 	\caption{Test image 9 and its prediction.}
 \end{figure}
 
-In general the roads are well segmented from the background. In Figure 4 the network was able to recognize the roads, although on the right they were hidden by some trees. It also did not misclassify the parking lot as road. The small part of road on the bottom left was also correctly classified, unfortunately not that smoothly due to the patch size. In Figure 5 one can see some misclassified patches on the highway, although the rails and the parking lot were correcty labelled as background. Also in this case all roads were well detected in general. The CNN performs quite good .\\As one can observe, a window size of 72x72 and patch size of 16x16 doesn't give very smooth predictions. This is obviously caused by the fact, that we predict one label for a whole patch. If one chooses smaller patches, one will get smoother results. This can be seen in Figure 6. In the smoother case we chose a window size of 16x16 and patch size 4x4.\\
+In general the roads are well segmented from the background. In Figure 4 the network was able to recognize the roads, although on the right they were hidden by some trees. It also did not misclassify the parking lot as road. The small part of road on the bottom left was also correctly classified, unfortunately not that smoothly due to the patch size. In Figure 5 one can see some misclassified patches on the highway, although the rails and the parking lot were correcty labelled as background. Also in this case all roads were well detected in general. The CNN performs quite good. \\As one can observe, a window size of 72x72 and patch size of 16x16 doesn't give very smooth predictions. This is obviously caused by the fact, that we predict one label for a whole patch. If one chooses smaller patches, one will get smoother results. This can be seen in Figure 6. In the smoother case we chose a window size of 16x16 and patch size 4x4.\\
 
 
 \begin{figure}[htbp]
@@ -281,14 +288,14 @@ The final results for both Convolutional Neural Networks and the U-Net are displ
 
 \begin{table}[htbp]
 	\centering
-	\begin{tabular}[c]{|l||l|}
+	\begin{tabular}[c]{|l||l|l|}
 		\hline
-		\textbf{Model}&\textbf{F1-Score}\\
+		\textbf{Model}&\textbf{F1-Score}&\textbf{Accuracy}\\
 		\hline
-		\textbf{CNN}, 16x16 window, 4x4 patch&0.741\\
-	 	\textbf{CNN}, 72x72 window, 16x16 patch&0.882\\
-	 	\textbf{CNN 2}, 128x128 window, 16x16 patch&0.862\\
-		\textbf{U-Net}, dropout = 0.5, LReLu = 0.3 &0.898\\
+		\textbf{CNN}, 16x16 window, 4x4 patch&0.741&0.883\\
+	 	\textbf{CNN}, 72x72 window, 16x16 patch&0.882&0.983\\
+	 	\textbf{CNN 2}, 128x128 window, 16x16 patch&0.862&0.924\\
+		\textbf{U-Net}, dropout = 0.5, LReLu = 0.3 &0.898&0.947\\
 		\hline
 	\end{tabular}
 	\caption{Results.}
@@ -309,7 +316,7 @@ The final results for both Convolutional Neural Networks and the U-Net are displ
 
 
 
-\section*{Acknowledgements}
+%\section*{Acknowledgements}
 
 
 \bibliographystyle{IEEEtran}
