@@ -128,7 +128,7 @@ We therefore augment our training data in order to achieve better results. We ro
 \subsubsection{Convolutional Neural Network}
 \label{cnn}
 
-With aim of classifying the whole image and not just one patch, we make use of the so called 'sliding window' approach that is illustrated in Figure 3.
+With aim of classifying the whole image and not just one patch, we make use of the so called 'sliding window' approach that is illustrated in Figure 4.
 
 
 \begin{figure}[htbp]
@@ -139,7 +139,7 @@ With aim of classifying the whole image and not just one patch, we make use of t
 	\label{fig:slidwindo}
 \end{figure}
 
-In order to apply this technique to patches near the border, we have to enlarge the images. We therefore choose a padding method: At the border we reflect each image along its boundary axes. Then we move the window through the whole image. For each window we classify the label of the patch in the center. 
+In order to apply this technique into the patches near the border, we have to enlarge the images. We therefore choose a padding method: At the border we reflect each image along its boundary axes. Then we move the window through the whole image. For each window we classify the label of the patch in the center. 
 \\
 
 
@@ -177,7 +177,7 @@ The architecture of our first Convolutional Neural Net is displayed in Table 1. 
 
 \subsubsection{U-Net}
 
-Figure 4 is taken from \cite{unet} and demonstrates the architecture of the U-Net. 
+Figure 5 is taken from \cite{unet} and demonstrates the architecture of the U-Net. 
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=8cm]{images/unet.png}
@@ -196,7 +196,7 @@ The decoder consists of upconvolutional layers which combine the features from t
 
 \subsubsection{Convolutional Neural Network}
 In the training process we randomly choose a window of an image of the training data. We then compute the corresponding patch of the groundtruth image. The groundtruth label is then given by the mean of all pixels in this patch: If it is higher than a certain threshold, 0.25 in our case, then the label will be 1, otherwise 0.\\
-By doing so we get even much more training data since each window of each image actually  corresponds to one training image. \\We tuned the following hyperparameters: the parameter  $\alpha$ for the Leaky Relu Function $f(x)=max(x,\alpha x)$, the dropout probability, window size, patch size. \\
+By doing so we get even much more training data since each window of each image actually  corresponds to one training image. \\We tuned the following hyperparameters: the parameter  $\alpha$ for the Leaky Relu Function $f(x)=max(x,\alpha x)$, the dropout probability, window size, and patch size. \\
 
 \subsubsection{U-Net}
 Training with the U-Net is done directly. We feed in the test images and the groundtruths are already given as the 400x400 binary images. In this model we tuned the following hyperparameters: the parameter  $\alpha$ for the Leaky Relu Function $f(x)=max(x,\alpha x)$, the dropout probability, the filter size. \\
@@ -247,7 +247,7 @@ Two test images and their predictions obtained by CNN are displayed in Figure 6 
 	\caption{Test image 9 and its prediction.}
 \end{figure}
 
-In general the roads are well segmented from the background. In Figure 4 the network was able to recognize the roads, although on the right they were hidden by some trees. It also did not misclassify the parking lot as road. The small part of road on the bottom left was also correctly classified, unfortunately not that smoothly due to the patch size. In Figure 5 one can see some misclassified patches on the highway, although the rails and the parking lot were correcty labelled as background. Also in this case all roads were well detected in general. The CNN performs quite good. As one can observe, a window size of 72x72 and patch size of 16x16 doesn't give very smooth predictions. This is obviously caused by the fact, that we predict one label for a whole patch. If one chooses smaller patches, one will get smoother results. This can be seen in Figure 8. In the smoother case we chose a window size of 16x16 and patch size 4x4. AICrowd expects labels for patches of size 16x16. Therefore in the latter case we computed the mean over 16 smaller patches of size 4x4 to compute the label for the 16x16 patch in which the smaller patches are lying inside. 
+In general the roads are well segmented from the background. In Figure 6 the network was able to recognize the roads, although on the right they were hidden by some trees. It also did not misclassify the parking lot as road. The small part of road on the bottom left was also correctly classified, unfortunately not that smoothly due to the patch size. In Figure 7 one can see some misclassified patches on the highway, although the rails and the parking lot were correcty labelled as background. Also in this case all roads were well detected in general. The CNN performs quite good. As one can observe, a window size of 72x72 and patch size of 16x16 doesn't give very smooth predictions. This is obviously caused by the fact, that we predict one label for a whole patch. If one chooses smaller patches, one will get smoother results. This can be seen in Figure 8. In the smoother case we chose a window size of 16x16 and patch size 4x4. AICrowd expects labels for patches of size 16x16. Therefore in the latter case we computed the mean over 16 smaller patches of size 4x4 to compute the label for the 16x16 patch in which the smaller patches are lying inside. 
 \begin{figure}[htbp]
 	\centering
 	\begin{subfigure}[b]{0.15\textwidth}
