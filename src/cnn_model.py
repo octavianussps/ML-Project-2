@@ -171,9 +171,6 @@ class CnnModel(keras.Model):
         print('Training completed')
         return history
 
-    """
-    Save the trained model's weight 
-    """
     def save(self,
              filepath,
              overwrite=True,
@@ -181,6 +178,16 @@ class CnnModel(keras.Model):
              save_format=None,
              signatures=None,
              options=None):
+    """
+    Save the trained model's weight 
+    Inputs:
+    	filepath = path to save the weight
+    	overwrite = boolean operation, overwrite the best weight
+    	include_optimizer = boolean operation, utilize the optimizer
+    	save_format = specific format to save
+    	signatures = signature of the model
+    	options = option
+    """
         self.model.save_weights(filepath)
         print("finish saving model.")
 
@@ -198,6 +205,13 @@ class CnnModel(keras.Model):
     Predict the images
     Inputs:
     	x = input image
+    	batch_size = batch size
+    	verbose = verbose
+    	steps = step
+    	callback = callback
+    	max_queue_size = maximum queue size
+    	workers = workers
+    	use_multiprocessing = boolean operation, utilize multiprocessing
     
     Output:
        group_pathes = rebuilt predicted image

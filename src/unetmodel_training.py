@@ -22,7 +22,6 @@ def main():
     image_dir = TRAIN_DATA + "images/"
     gt_dir = TRAIN_DATA + "groundtruth/"
     
-    
     files = os.listdir(image_dir)
     n = NUM_IMAGES
     
