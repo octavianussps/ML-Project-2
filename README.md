@@ -52,13 +52,13 @@ We implement a Convolutional Neural Network using the sliding window Approach an
 ## **Prerequisites**
 
 The code is tested with the following versions 
-- `Python 3.7.x`
-- `Numpy 1.17.xx`
-- `Matplotlib 3.1.x`
-- `TensorFlow 2.0`
-- `Pillow 6.2.xx`
-- `Scipy 1.5.x`
-- `scikit-learn 0.23.x`
+- `Python 3.6.8`
+- `Numpy 1.16.3`
+- `Matplotlib 3.0.3`
+- `TensorFlow 2.3.1`
+- `Pillow 6.0.0`
+- `Scipy 1.2.1`
+- `Scikit-learn 0.23.2`
 
 
 ### **Installation**
