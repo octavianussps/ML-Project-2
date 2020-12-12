@@ -4,6 +4,10 @@ from tensorflow.keras import layers
 from helpers import *
 import matplotlib.pyplot as plt
 
+
+######################################
+# PARAMETERS
+######################################
 NUM_CHANNELS =3
         
      
@@ -130,7 +134,7 @@ def unet_model(img_size, num_filters):
 
 
 
-def train(model, x_train, y_train, batch_size, num_epochs):
+def trainUNET(model, x_train, y_train, batch_size, num_epochs):
     """
     Optimize the model and return the model with the training F1-Score
     Inputs:

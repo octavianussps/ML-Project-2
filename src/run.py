@@ -1,11 +1,13 @@
 import tensorflow as tf
 from helpers import *
-from unetmodel import *
+from unet import *
 import tensorflow.keras as keras
 import sys
 
 
-
+######################################
+# PARAMETERS
+######################################
 
 PATH_LRELU = '../models/unetLReLU.h5'
 PATH_TEST_DATA = '../data/test_set_images/'

@@ -2,6 +2,9 @@ from helpers import *
 from cnn import CnnModel
 #from utils.metrics import f1_scores
 
+######################################
+# PARAMETERS
+######################################
 data_dir = '../data/training/'
 train_data_filename = data_dir + 'images/'
 train_labels_filename = data_dir + 'groundtruth/'

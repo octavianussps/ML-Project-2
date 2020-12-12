@@ -1,8 +1,12 @@
 import tensorflow as tf
 from helpers import *
-from cnn_model import CnnModel
+from cnn import CnnModel
 import tensorflow.keras as keras
 import sys
+
+######################################
+# PARAMETERS
+######################################
 
 PATH_WEIGHTS = '../models/weightsFinal.h5'
 PATH_PATCH = '../models/weightsPatch4.h5'
