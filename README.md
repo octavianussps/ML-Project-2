@@ -20,7 +20,7 @@ We implement a Convolutional Neural Network using the sliding window Approach an
 
 | Folder  | Files |
 |:--:|:--:|
-| `data/`  | test data |
+| `data/`  | contains the test data |
 | `latex/` | contains the pdf and the latex report of our project |
 | `models/`  | constains the differents models we use |
 | `out/`  | contains the final submission files, also csv format |
@@ -77,7 +77,7 @@ pip install --upgrade keras
 
 
 ## **Dataset**
-We did not put the trainig data in the github because it takes too much memory place.
+We did not put the test data in the github because it takes too much memory place.
 In https://www.aicrowd.com/challenges/epfl-ml-road-segmentation you will find the training set consisting of images with their ground truth and the test set where we did our predictions on. 
 Download it and put it in the folder named `data/`.
 
