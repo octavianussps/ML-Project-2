@@ -1,11 +1,20 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
 \BOOKMARK [1][-]{section.2}{Methods}{}% 2
 \BOOKMARK [2][-]{subsection.2.1}{Classification Task}{section.2}% 3
-\BOOKMARK [2][-]{subsection.2.2}{Data Augmentation}{section.2}% 4
-\BOOKMARK [2][-]{subsection.2.3}{Convolutional Neural Net}{section.2}% 5
-\BOOKMARK [2][-]{subsection.2.4}{Training}{section.2}% 6
-\BOOKMARK [2][-]{subsection.2.5}{Prediction}{section.2}% 7
-\BOOKMARK [1][-]{section.3}{Results}{}% 8
-\BOOKMARK [1][-]{section.4}{Discussion}{}% 9
-\BOOKMARK [1][-]{section.5}{Summary}{}% 10
-\BOOKMARK [1][-]{section*.11}{References}{}% 11
+\BOOKMARK [2][-]{subsection.2.2}{Regression Task}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Data Augmentation}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{Network structure}{section.2}% 6
+\BOOKMARK [3][-]{subsubsection.2.4.1}{Convolutional Neural Network}{subsection.2.4}% 7
+\BOOKMARK [3][-]{subsubsection.2.4.2}{U-Net}{subsection.2.4}% 8
+\BOOKMARK [2][-]{subsection.2.5}{Training}{section.2}% 9
+\BOOKMARK [3][-]{subsubsection.2.5.1}{Convolutional Neural Network}{subsection.2.5}% 10
+\BOOKMARK [3][-]{subsubsection.2.5.2}{U-Net}{subsection.2.5}% 11
+\BOOKMARK [2][-]{subsection.2.6}{Prediction}{section.2}% 12
+\BOOKMARK [3][-]{subsubsection.2.6.1}{Convolutional Neural Network}{subsection.2.6}% 13
+\BOOKMARK [3][-]{subsubsection.2.6.2}{U-Net}{subsection.2.6}% 14
+\BOOKMARK [1][-]{section.3}{Results}{}% 15
+\BOOKMARK [2][-]{subsubsection.3.0.1}{Convolutional Neural Network}{section.3}% 16
+\BOOKMARK [3][-]{subsubsection.3.0.2}{U-Net}{subsubsection.3.0.1}% 17
+\BOOKMARK [1][-]{section.4}{Discussion}{}% 18
+\BOOKMARK [1][-]{section.5}{Summary}{}% 19
+\BOOKMARK [1][-]{section*.12}{References}{}% 20
